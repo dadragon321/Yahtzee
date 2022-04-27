@@ -29,8 +29,9 @@ public class Yahtzee {
       11: Yahtzee
       12: Chance
       13: Bonus Yahtzee
+      14: Upper Bonus
     */
-    int[] scoreSheet = new int[14];
+    int[] scoreSheet = new int[15];
   }
 
   public void roll(int n) {
@@ -44,5 +45,17 @@ public class Yahtzee {
 
   public ArrayList<Integer> getDice() {
     return dice;
+  }
+
+  public int checkUpperBonus(Yahtzee game) {
+    int sum = 0;
+    for (int i = 0; i < 6; i++) {
+      sum += game.scoreSheet[i];
+    }
+    if (sum > 63) {
+      return 35;
+    } else {
+      return 0;
+    }
   }
 }
