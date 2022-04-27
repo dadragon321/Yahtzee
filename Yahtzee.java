@@ -20,7 +20,4 @@ public class Yahtzee {
   public int[] getDice() {
     return dice;
   }
-  public boolean testMethod() {
-    return true;
-  }
 }
