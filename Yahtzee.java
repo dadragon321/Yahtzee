@@ -39,7 +39,6 @@ public class Yahtzee {
       14: Upper Bonus
     */
     int[] scoreSheet = new int[15];
-<<<<<<< HEAD
   }
 
   public turn() {
@@ -51,8 +50,7 @@ public class Yahtzee {
       if(drop>0 && drop<dice.size()+1)
         dice.remove(drop+1);
     }
-=======
->>>>>>> 58e224b4aaff42ff7a0282e224d98b4875ff8eb4
+
   }
 
   public void roll(int n) {
@@ -84,8 +82,6 @@ public class Yahtzee {
       return 0;
     }
   }
-<<<<<<< HEAD
-=======
 
   public void displayPossibleScores(Yahtzee game) {
 
