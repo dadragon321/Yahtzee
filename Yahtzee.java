@@ -55,6 +55,33 @@ public class Yahtzee {
     for(int i=0; i<n; i++)
       dice.add((int)(Math.random()*6 + 1));
   }
+  
+  /**
+  public int[] checkDice(ArrayList<Integer> dice) {
+    int [] arr = [0, 0, 0, 0, 0, 0];
+    for (i = 0; i < 5; i++) {
+      if (dice.get(i) == 1) {
+        arr[0] = arr[0]++;
+      }
+      if (dice.get(i) == 2) {
+        arr[1] = arr[1]++;
+      }
+      if (dice.get(i) == 3) {
+        arr[2] = arr[2]++;
+      }
+      if (dice.get(i) == 4) {
+        arr[3] = arr[3]++;
+      }
+      if (dice.get(i) == 5) {
+        arr[4] = arr[4]++;
+      }
+      if (dice.get(i) == 6) {
+        arr[5] = arr[5]++;
+      }
+  }
+  return arr;
+  }
+*/
 
   private int score(ArrayList<Integer> roll) {
     return 0;
