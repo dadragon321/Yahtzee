@@ -4,18 +4,16 @@ import java.util.Scanner;
 public class Yahtzee {
   private Scanner sc;
   private ArrayList<Integer> dice;
+  private int[] scoreSheet;
 
   public static void main(String[] args) {
     Yahtzee game = new Yahtzee();
-    game.roll(7);
-    for(int val:game.getDice())
-      System.out.println(val);
+    game.turn();
   }
 
   public Yahtzee() {
     sc = new Scanner(System.in);
     dice = new ArrayList<Integer>();
-    dice = new int[5];
     /*
       scoresheet array to store scores
       0: 1's
@@ -37,52 +35,48 @@ public class Yahtzee {
     int[] scoreSheet = new int[15];
   }
 
-  public turn() {
-    game.roll(6);
+  public void turn() {
+    roll(6);
+    checkDice();
     int drop;
-    while(i !=0 && dice.size()>0) {
+    int count = 0;
+    do {
       System.out.print("Choose which dice to reroll (Enter 0 to move to reroll): ");
       drop = sc.nextInt();
-      if(drop>0 && drop<dice.size()+1)
-        dice.remove(drop+1);
-    }
+      if(drop>0 && drop<=dice.size()) {
+        dice.remove(drop-1);
+        count++;
+      }
+    } while(drop !=0 && dice.size()>0);
 
+    roll(count);
+    checkDice();
+    count = 0;
+    do {
+      System.out.print("Choose which dice to reroll (Enter 0 to move to reroll): ");
+      drop = sc.nextInt();
+      if(drop>0 && drop<=dice.size()) {
+        dice.remove(drop-1);
+        count++;
+      }
+    } while(drop !=0 && dice.size()>0);
+
+    roll(count);
+    checkDice();
   }
 
   public void roll(int n) {
     for(int i=0; i<n; i++)
       dice.add((int)(Math.random()*6 + 1));
   }
-  
-  /**
-  public int[] checkDice(ArrayList<Integer> dice) {
-    int [] arr = [0, 0, 0, 0, 0, 0];
-    for (i = 0; i < 5; i++) {
-      if (dice.get(i) == 1) {
-        arr[0] = arr[0]++;
-      }
-      if (dice.get(i) == 2) {
-        arr[1] = arr[1]++;
-      }
-      if (dice.get(i) == 3) {
-        arr[2] = arr[2]++;
-      }
-      if (dice.get(i) == 4) {
-        arr[3] = arr[3]++;
-      }
-      if (dice.get(i) == 5) {
-        arr[4] = arr[4]++;
-      }
-      if (dice.get(i) == 6) {
-        arr[5] = arr[5]++;
-      }
-  }
-  return arr;
-  }
-*/
 
   private int score(ArrayList<Integer> roll) {
     return 0;
+  }
+
+  public void checkDice() {
+    for(int val:dice)
+      System.out.println(val);
   }
 
   public ArrayList<Integer> getDice() {
@@ -97,7 +91,7 @@ public class Yahtzee {
   public int checkUpperBonus(Yahtzee game) {
     int sum = 0;
     for (int i = 0; i < 6; i++) {
-      sum += game.scoreSheet[i];
+      sum += scoreSheet[i];
     }
     if (sum > 63) {
       return 35;
@@ -106,50 +100,44 @@ public class Yahtzee {
     }
   }
 
-  /*
   public void displayPossibleScores(Yahtzee game) {
-
   }
 
   public int possibleSingleUpperSectionPoints(Yahtzee game) {
-    for (int i = 1; i <= 6; i++) {
-      score = 0;
-      for(int die : game.dice) {
-        if (die == i) {
-          score += die;
-        }
-      }
-    }
+    // for (int i = 1; i <= 6; i++) {
+    //   for(int )
+    // }
+    return 0;
   }
 
   public int possibleThreeOfAKindPoints(Yahtzee game) {
-
+    return 0;
   }
 
   public int possibleFourOfAKindPoints(Yahtzee game) {
-
+    return 0;
   }
 
   public int possibleFullHousePoints(Yahtzee game) {
-
+    return 0;
   }
 
   public int possibleSmallStraightPoints(Yahtzee game) {
-
+    return 0;
   }
 
   public int possibleSmallLargePoints(Yahtzee game) {
-
+    return 0;
   }
 
   public int possibleYahtzeePoints(Yahtzee game) {
-
+    return 0;
   }
 
   public int possibleChancePoints(Yahtzee game) {
-
+    return 0;
   }
-
+  /*
       scoresheet array to store scores
       0: 1's
       1: 2's
