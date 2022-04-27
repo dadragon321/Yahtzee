@@ -2,12 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Yahtzee {
-<<<<<<< HEAD
   private Scanner sc;
   private ArrayList<Integer> dice;
-=======
-    private ArrayList<Integer> dice;
->>>>>>> 58e224b4aaff42ff7a0282e224d98b4875ff8eb4
 
   public static void main(String[] args) {
     Yahtzee game = new Yahtzee();
@@ -83,13 +79,19 @@ public class Yahtzee {
     }
   }
 
+  /*
   public void displayPossibleScores(Yahtzee game) {
 
   }
 
   public int possibleSingleUpperSectionPoints(Yahtzee game) {
     for (int i = 1; i <= 6; i++) {
-      for(int )
+      score = 0;
+      for(int die : game.dice) {
+        if (die == i) {
+          score += die;
+        }
+      }
     }
   }
 
@@ -120,7 +122,7 @@ public class Yahtzee {
   public int possibleChancePoints(Yahtzee game) {
     
   }
-  /*
+
       scoresheet array to store scores
       0: 1's
       1: 2's
@@ -138,5 +140,4 @@ public class Yahtzee {
       13: Bonus Yahtzee
       14: Upper Bonus
     */
->>>>>>> 58e224b4aaff42ff7a0282e224d98b4875ff8eb4
 }
