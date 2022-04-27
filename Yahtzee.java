@@ -13,6 +13,6 @@ public class Yahtzee {
     return dice;
   }
   public boolean testMethod() {
-    return true;
+    return false;
   }
 }
