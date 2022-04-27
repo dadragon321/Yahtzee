@@ -17,6 +17,10 @@ public class Yahtzee {
       dice[i] = (int)(Math.random()*6 + 1);
   }
 
+  private int score(int[] roll) {
+    
+  }
+
   public int[] getDice() {
     return dice;
   }
