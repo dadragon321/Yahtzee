@@ -18,13 +18,9 @@ public class Yahtzee {
   }
 
   private int score(int[] roll) {
-    
   }
 
   public int[] getDice() {
     return dice;
-  }
-  public boolean testMethod() {
-    return false;
   }
 }
