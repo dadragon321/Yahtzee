@@ -96,31 +96,31 @@ public class Yahtzee {
   }
 
   public int possibleThreeOfAKindPoints(Yahtzee game) {
-    
+
   }
 
   public int possibleFourOfAKindPoints(Yahtzee game) {
-    
+
   }
 
   public int possibleFullHousePoints(Yahtzee game) {
-    
+
   }
 
   public int possibleSmallStraightPoints(Yahtzee game) {
-    
+
   }
 
   public int possibleSmallLargePoints(Yahtzee game) {
-    
+
   }
 
   public int possibleYahtzeePoints(Yahtzee game) {
-    
+
   }
 
   public int possibleChancePoints(Yahtzee game) {
-    
+
   }
 
       scoresheet array to store scores
