@@ -12,4 +12,7 @@ public class Yahtzee {
       dice[i] = (int)(Math.random()*6 + 1);
     return dice;
   }
+  public boolean testMethod() {
+    return true;
+  }
 }
