@@ -47,6 +47,11 @@ public class Yahtzee {
     return dice;
   }
 
+  /**
+    Checks total from upper section to see if
+    bonus should be awarded or not. Returns 35
+    if threshold is met, 0 otherwise.
+   */
   public int checkUpperBonus(Yahtzee game) {
     int sum = 0;
     for (int i = 0; i < 6; i++) {
