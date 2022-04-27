@@ -14,12 +14,23 @@ public class Yahtzee {
     dice = new ArrayList<Integer>();
     dice = new int[5];
     /*
-      scoresheet 2D array to store scores
-      0: 
-
-
+      scoresheet array to store scores
+      0: 1's
+      1: 2's
+      2: 3's
+      3: 4's
+      4: 5's
+      5: 6's
+      6: 3 of a kind
+      7: 4 of a kind
+      8: full house
+      9: small straight
+      10: large straigt
+      11: Yahtzee
+      12: Chance
+      13: Bonus Yahtzee
     */
-    int[] scoreSheet = new int[13];
+    int[] scoreSheet = new int[14];
   }
 
   public void roll(int n) {
