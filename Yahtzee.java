@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Yahtzee {
-  private ArrayList<Integer> dice;
+    private ArrayList<Integer> dice;
 
   public static void main(String[] args) {
     Yahtzee game = new Yahtzee();
@@ -12,6 +12,14 @@ public class Yahtzee {
 
   public Yahtzee() {
     dice = new ArrayList<Integer>();
+    dice = new int[5];
+    /*
+      scoresheet 2D array to store scores
+      0: 
+
+
+    */
+    int[] scoreSheet = new int[13];
   }
 
   public void roll(int n) {
