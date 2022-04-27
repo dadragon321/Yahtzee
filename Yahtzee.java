@@ -1,15 +1,23 @@
 public class Yahtzee {
+  private int[] dice;
+
   public static void main(String[] args) {
     Yahtzee game = new Yahtzee();
-    int[] dice = game.roll();
-    for(int val:dice)
+    game.roll();
+    for(int val:game.getDice())
       System.out.println(val);
   }
 
-  public int[] roll() {
-    int[] dice = new int[5];
+  public Yahtzee() {
+    dice = new int[5];
+  }
+
+  public void roll() {
     for(int i=0; i<5; i++)
       dice[i] = (int)(Math.random()*6 + 1);
+  }
+
+  public int[] getDice() {
     return dice;
   }
 }
