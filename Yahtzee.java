@@ -4,18 +4,19 @@ import java.util.Scanner;
 public class Yahtzee {
   private Scanner sc;
   private ArrayList<Integer> dice;
+  private int [] scoreSheet;
 
   public static void main(String[] args) {
     Yahtzee game = new Yahtzee();
-    game.roll(7);
+    displayPossibleScores(game);
+    /*game.roll(7);
     for(int val:game.getDice())
-      System.out.println(val);
+      System.out.println(val);*/
   }
 
   public Yahtzee() {
     sc = new Scanner(System.in);
     dice = new ArrayList<Integer>();
-    dice = new int[5];
     /*
       scoresheet array to store scores
       0: 1's
@@ -34,20 +35,21 @@ public class Yahtzee {
       13: Bonus Yahtzee
       14: Upper Bonus
     */
-    int[] scoreSheet = new int[15];
+    scoreSheet = new int[15];
   }
 
-  public turn() {
+  /*
+  public void turn(Yahtzee game) {
     game.roll(6);
     int drop;
-    while(i !=0 && dice.size()>0) {
+    while(int i !=0 && dice.size()>0) {
       System.out.print("Choose which dice to reroll (Enter 0 to move to reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<dice.size()+1)
         dice.remove(drop+1);
     }
-
   }
+  */
 
   public void roll(int n) {
     for(int i=0; i<n; i++)
@@ -79,12 +81,14 @@ public class Yahtzee {
     }
   }
 
-  /*
-  public void displayPossibleScores(Yahtzee game) {
-
+  public static void displayPossibleScores(Yahtzee game) {
+    System.out.print(possibleSingleUpperSectionPoints(game));
   }
 
-  public int possibleSingleUpperSectionPoints(Yahtzee game) {
+  public static String possibleSingleUpperSectionPoints(Yahtzee game) {
+    String resultString = "";
+    int score;
+
     for (int i = 1; i <= 6; i++) {
       score = 0;
       for(int die : game.dice) {
@@ -92,9 +96,13 @@ public class Yahtzee {
           score += die;
         }
       }
+      resultString += "Possible Points in " + String.valueOf(i) + "'s: " +
+                      String.valueOf(score) + "\n";
     }
-  }
 
+    return resultString;
+  }
+  /*
   public int possibleThreeOfAKindPoints(Yahtzee game) {
 
   }
@@ -122,7 +130,8 @@ public class Yahtzee {
   public int possibleChancePoints(Yahtzee game) {
 
   }
-
+  */
+  /*
       scoresheet array to store scores
       0: 1's
       1: 2's
