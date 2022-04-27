@@ -32,7 +32,7 @@ public class Yahtzee {
       13: Bonus Yahtzee
       14: Upper Bonus
     */
-    int[] scoreSheet = new int[15];
+    scoreSheet = new int[15];
   }
 
   public void turn() {
@@ -100,14 +100,26 @@ public class Yahtzee {
     }
   }
 
-  public void displayPossibleScores(Yahtzee game) {
+  public static void displayPossibleScores(Yahtzee game) {
+    System.out.print(possibleSingleUpperSectionPoints(game));
   }
 
-  public int possibleSingleUpperSectionPoints(Yahtzee game) {
-    // for (int i = 1; i <= 6; i++) {
-    //   for(int )
-    // }
-    return 0;
+  public static String possibleSingleUpperSectionPoints(Yahtzee game) {
+    String resultString = "";
+    int score;
+
+    for (int i = 1; i <= 6; i++) {
+      score = 0;
+      for(int die : game.dice) {
+        if (die == i) {
+          score += die;
+        }
+      }
+      resultString += "Possible Points in " + String.valueOf(i) + "'s: " +
+                      String.valueOf(score) + "\n";
+    }
+
+    return resultString;
   }
 
   public int possibleThreeOfAKindPoints(Yahtzee game) {
@@ -137,6 +149,7 @@ public class Yahtzee {
   public int possibleChancePoints(Yahtzee game) {
     return 0;
   }
+
   /*
       scoresheet array to store scores
       0: 1's
