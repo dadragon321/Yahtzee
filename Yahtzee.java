@@ -136,8 +136,18 @@ public class Yahtzee {
 
   public static void displayPossibleScores(Yahtzee game) {
     System.out.print(possibleSingleUpperSectionPoints(game));
+    System.out.print(possibleThreeOfAKindPoints(game));
+    System.out.print(possibleFourOfAKindPoints(game));
+    System.out.print(possibleFullHousePoints(game));
+    System.out.print(possibleSmallStraightPoints(game));
+    System.out.print(possibleLargeStraightPoints(game));
   }
 
+  /**
+    This method checks each of the upper section boxes. It provides
+    the user possible points for each of 1's, 2's, 3's, 4's, 5's and
+    6's  
+   */
   public static String possibleSingleUpperSectionPoints(Yahtzee game) {
     String resultString = "";
     int score;
@@ -156,6 +166,9 @@ public class Yahtzee {
     return resultString;
   }
 
+  /**
+    This method checks to see if the user has a three of a kind  
+   */
   public String possibleThreeOfAKindPoints(Yahtzee game) {
     HashMap<int, int> diceCount = new HashMap<int, int>;
     sumOfDice = 0;
@@ -173,6 +186,9 @@ public class Yahtzee {
     return "Possible Points in 3 of a Kind: 0";
   }
 
+  /**
+    This method checks to see if the user has a four of a kind  
+   */
   public String possibleFourOfAKindPoints(Yahtzee game) {
     HashMap<int, int> diceCount = new HashMap<int, int>;
     sumOfDice = 0;
@@ -190,6 +206,11 @@ public class Yahtzee {
     return "Possible Points in 4 of a Kind: 0";
   }
 
+  /**
+    This method checks for a full house. If one dice value has
+    2 occurances and another dice value has 3, the user has a
+    possible full house.
+   */
   public String possibleFullHousePoints(Yahtzee game) {
     HashMap<int, int> diceCount = new HashMap<int, int>;
     sumOfDice = 0;
@@ -216,16 +237,41 @@ public class Yahtzee {
     return "Possible Points in Full House: 0";
   }
 
-  public int possibleSmallStraightPoints(Yahtzee game) {
-    return 0;
+  /**
+    This method checks all 3 possibilities of a small straight
+   */
+  public String possibleSmallStraightPoints(Yahtzee game) {
+    if(game.dice.includes(1) && game.dice.includes(2) && 
+        game.dice.includes(3) && game.dice.includes(4)) {
+      return "Possible Points in Small Straight: 30";
+    } 
+    else if(game.dice.includes(2) && game.dice.includes(3) && 
+        game.dice.includes(4) && game.dice.includes(5)) {
+      return "Possible Points in Small Straight: 30";
+    } 
+    else if(game.dice.includes(3) && game.dice.includes(4) && 
+        game.dice.includes(5) && game.dice.includes(6)) {
+      return "Possible Points in Small Straight: 30";
+    }
+    return "Possible Points in Small Straight: 0";
   }
 
-  public int possibleSmallLargePoints(Yahtzee game) {
-    return 0;
+  public String possibleLargeStraightPoints(Yahtzee game) {
+    dice = Arrays.sort(game.dice);
+    for (int i = 1; i < 5; i++) {
+      if(dice[i] != dice[i-1] + 1) {
+        return "Possible Points in Large Straight: 0";
+      }
+    }
+    return "Possible Points in Large Straight: 40";
   }
 
   public int possibleYahtzeePoints(Yahtzee game) {
-    return 0;
+    dice = Arrays.sort(game.dice);
+    if (dice[0] == dice[4]) {
+      return "Possible Points in Yahtzee: 50";
+    }
+    return "Possible Points in Yahtzee: 0";
   }
 
   public int possibleChancePoints(Yahtzee game) {
