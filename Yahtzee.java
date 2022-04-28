@@ -110,6 +110,13 @@ public class Yahtzee {
     return dice;
   }
 
+  public int sumDice(Yahtzee game) {
+    sumOfDice = 0;
+    for (int die : game.dice) {
+      sumOfDice++;
+    }
+    return sumOfDice;
+  }
   /**
     Checks total from upper section to see if
     bonus should be awarded or not. Returns 35
@@ -149,16 +156,64 @@ public class Yahtzee {
     return resultString;
   }
 
-  public int possibleThreeOfAKindPoints(Yahtzee game) {
-    return 0;
+  public String possibleThreeOfAKindPoints(Yahtzee game) {
+    HashMap<int, int> diceCount = new HashMap<int, int>;
+    sumOfDice = 0;
+    for (int die : game.dice) {
+      if (diceCount.get(die) == null) {
+        diceCount.put(die, 1);
+      } else {
+        diceCount.put(die, diceCount.get(die) + 1);
+        if (diceCount.get(die) == 3) {
+          sumOfDice = sumDice();
+          return "Possible Points in 3 of a Kind: " + String.valueOf(sumOfDice);
+        }
+      }
+    }
+    return "Possible Points in 3 of a Kind: 0";
   }
 
-  public int possibleFourOfAKindPoints(Yahtzee game) {
-    return 0;
+  public String possibleFourOfAKindPoints(Yahtzee game) {
+    HashMap<int, int> diceCount = new HashMap<int, int>;
+    sumOfDice = 0;
+    for (int die : game.dice) {
+      if (diceCount.get(die) == null) {
+        diceCount.put(die, 1);
+      } else {
+        diceCount.put(die, diceCount.get(die) + 1);
+        if (diceCount.get(die) == 4) {
+          sumOfDice = sumDice();
+          return "Possible Points in 4 of a Kind: " + String.valueOf(sumOfDice);
+        }
+      }
+    }
+    return "Possible Points in 4 of a Kind: 0";
   }
 
-  public int possibleFullHousePoints(Yahtzee game) {
-    return 0;
+  public String possibleFullHousePoints(Yahtzee game) {
+    HashMap<int, int> diceCount = new HashMap<int, int>;
+    sumOfDice = 0;
+    for (int die : game.dice) {
+      if (diceCount.get(die) == null) {
+        diceCount.put(die, 1);
+      } else {
+        diceCount.put(die, diceCount.get(die) + 1);
+      }
+
+      boolean twoOfAKind = false, threeOfAKind = false;
+      for(int count : diceCount) {
+        if (count == 2) {
+          twoOfAKind = true;
+        } else if (count == 3) {
+          threeOfAKind = true;
+        }
+      }
+      if (twoOfAKind && threeOfAKind) {
+        return "Possible Points in Full House: 25";
+      }
+    }
+
+    return "Possible Points in Full House: 0";
   }
 
   public int possibleSmallStraightPoints(Yahtzee game) {
