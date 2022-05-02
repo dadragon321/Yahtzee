@@ -39,7 +39,7 @@ public class Yahtzee {
   }
 
   public void turn() {
-    roll(6);
+    roll(5);
     checkDice();
     int drop;
     int count = 0;
@@ -263,47 +263,47 @@ public class Yahtzee {
   /**
     This method checks all 3 possibilities of a small straight
    */
-  public static String possibleSmallStraightPoints(Yahtzee game) {
+  public static int possibleSmallStraightPoints(Yahtzee game) {
     if(game.dice.contains(1) && game.dice.contains(2) && 
         game.dice.contains(3) && game.dice.contains(4)) {
-      return "Possible Points in Small Straight: 30";
+      return 30;
     } 
     else if(game.dice.contains(2) && game.dice.contains(3) && 
         game.dice.contains(4) && game.dice.contains(5)) {
-      return "Possible Points in Small Straight: 30";
+      return 30;
     } 
     else if(game.dice.contains(3) && game.dice.contains(4) && 
         game.dice.contains(5) && game.dice.contains(6)) {
-      return "Possible Points in Small Straight: 30";
+      return 30;
     }
-    return "Possible Points in Small Straight: 0";
+    return 0;
   }
 
-  public static String possibleLargeStraightPoints(Yahtzee game) {
+  public static int possibleLargeStraightPoints(Yahtzee game) {
     ArrayList<Integer> dice = game.dice;
     Collections.sort(dice);
     for (int i = 1; i < 5; i++) {
       if(dice.get(i) != dice.get(i - 1) + 1) {
-        return "Possible Points in Large Straight: 0";
+        return 0;
       }
     }
-    return "Possible Points in Large Straight: 40";
+    return 40;
   }
 
-  public static String possibleYahtzeePoints(Yahtzee game) {
+  public static int possibleYahtzeePoints(Yahtzee game) {
     ArrayList<Integer> dice = game.dice;
     Collections.sort(dice);
     if (dice.get(0) == dice.get(4)) {
       if (game.scoreSheet[11] == 50) {
-        return "Possible Points in Yahtzee: 100";
+        return 100;
       }
-      return "Possible Points in Yahtzee: 50";
+      return 50;
     }
-    return "Possible Points in Yahtzee: 0";
+    return 0;
   }
 
-  public static String possibleChancePoints(Yahtzee game) {
-    return "Possible Points in Chance: " + String.valueOf(sumDice(game));
+  public static int possibleChancePoints(Yahtzee game) {
+    return sumDice(game);
   }
 
   /*
