@@ -111,7 +111,7 @@ public class Yahtzee {
   }
 
   public int sumDice(Yahtzee game) {
-    sumOfDice = 0;
+    int sumOfDice = 0;
     for (int die : game.dice) {
       sumOfDice++;
     }
@@ -266,7 +266,7 @@ public class Yahtzee {
     return "Possible Points in Large Straight: 40";
   }
 
-  public int possibleYahtzeePoints(Yahtzee game) {
+  public String possibleYahtzeePoints(Yahtzee game) {
     dice = Arrays.sort(game.dice);
     if (dice[0] == dice[4]) {
       return "Possible Points in Yahtzee: 50";
