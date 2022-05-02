@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Collections;
 
 public class Yahtzee {
   private Scanner sc;
@@ -40,6 +42,12 @@ public class Yahtzee {
     checkDice();
     int drop;
     int count = 0;
+    /*
+      testing score display
+    */
+    System.out.println("before");
+    displayPossibleScores(this);
+    System.out.println("after");
     do {
       System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
@@ -110,10 +118,10 @@ public class Yahtzee {
     return dice;
   }
 
-  public int sumDice(Yahtzee game) {
+  public static int sumDice(Yahtzee game) {
     int sumOfDice = 0;
     for (int die : game.dice) {
-      sumOfDice++;
+      sumOfDice += die;
     }
     return sumOfDice;
   }
@@ -136,11 +144,11 @@ public class Yahtzee {
 
   public static void displayPossibleScores(Yahtzee game) {
     System.out.print(possibleSingleUpperSectionPoints(game));
-    System.out.print(possibleThreeOfAKindPoints(game));
-    System.out.print(possibleFourOfAKindPoints(game));
-    System.out.print(possibleFullHousePoints(game));
-    System.out.print(possibleSmallStraightPoints(game));
-    System.out.print(possibleLargeStraightPoints(game));
+    System.out.println(possibleThreeOfAKindPoints(game));
+    System.out.println(possibleFourOfAKindPoints(game));
+    //System.out.println(possibleFullHousePoints(game));
+    System.out.println(possibleSmallStraightPoints(game));
+    System.out.println(possibleLargeStraightPoints(game));
   }
 
   /**
@@ -170,15 +178,15 @@ public class Yahtzee {
     This method checks to see if the user has a three of a kind  
    */
   public static String possibleThreeOfAKindPoints(Yahtzee game) {
-    HashMap<int, int> diceCount = new HashMap<int, int>;
-    sumOfDice = 0;
+    HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
+    int sumOfDice = 0;
     for (int die : game.dice) {
       if (diceCount.get(die) == null) {
         diceCount.put(die, 1);
       } else {
         diceCount.put(die, diceCount.get(die) + 1);
         if (diceCount.get(die) == 3) {
-          sumOfDice = sumDice();
+          sumOfDice = sumDice(game);
           return "Possible Points in 3 of a Kind: " + String.valueOf(sumOfDice);
         }
       }
@@ -190,15 +198,15 @@ public class Yahtzee {
     This method checks to see if the user has a four of a kind  
    */
   public static String possibleFourOfAKindPoints(Yahtzee game) {
-    HashMap<int, int> diceCount = new HashMap<int, int>;
-    sumOfDice = 0;
+    HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
+    int sumOfDice = 0;
     for (int die : game.dice) {
       if (diceCount.get(die) == null) {
         diceCount.put(die, 1);
       } else {
         diceCount.put(die, diceCount.get(die) + 1);
         if (diceCount.get(die) == 4) {
-          sumOfDice = sumDice();
+          sumOfDice = sumDice(game);
           return "Possible Points in 4 of a Kind: " + String.valueOf(sumOfDice);
         }
       }
@@ -207,13 +215,14 @@ public class Yahtzee {
   }
 
   /**
+    DOES NOT WORK
     This method checks for a full house. If one dice value has
     2 occurances and another dice value has 3, the user has a
     possible full house.
    */
   public static String possibleFullHousePoints(Yahtzee game) {
-    HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>;
-    sumOfDice = 0;
+    HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
+    int sumOfDice = 0;
     for (int die : game.dice) {
       if (diceCount.get(die) == null) {
         diceCount.put(die, 1);
@@ -222,13 +231,15 @@ public class Yahtzee {
       }
 
       boolean twoOfAKind = false, threeOfAKind = false;
-      for(int count : diceCount) {
+
+      for (Map.Entry<Integer, Integer> elem : diceCount.entrySet()) {
+        int count = ((int)elem.getValue());
         if (count == 2) {
           twoOfAKind = true;
         } else if (count == 3) {
           threeOfAKind = true;
         }
-      }
+    }
       if (twoOfAKind && threeOfAKind) {
         return "Possible Points in Full House: 25";
       }
@@ -241,23 +252,23 @@ public class Yahtzee {
     This method checks all 3 possibilities of a small straight
    */
   public static String possibleSmallStraightPoints(Yahtzee game) {
-    if(game.dice.includes(1) && game.dice.includes(2) && 
-        game.dice.includes(3) && game.dice.includes(4)) {
+    if(game.dice.contains(1) && game.dice.contains(2) && 
+        game.dice.contains(3) && game.dice.contains(4)) {
       return "Possible Points in Small Straight: 30";
     } 
-    else if(game.dice.includes(2) && game.dice.includes(3) && 
-        game.dice.includes(4) && game.dice.includes(5)) {
+    else if(game.dice.contains(2) && game.dice.contains(3) && 
+        game.dice.contains(4) && game.dice.contains(5)) {
       return "Possible Points in Small Straight: 30";
     } 
-    else if(game.dice.includes(3) && game.dice.includes(4) && 
-        game.dice.includes(5) && game.dice.includes(6)) {
+    else if(game.dice.contains(3) && game.dice.contains(4) && 
+        game.dice.contains(5) && game.dice.contains(6)) {
       return "Possible Points in Small Straight: 30";
     }
     return "Possible Points in Small Straight: 0";
   }
 
   public static String possibleLargeStraightPoints(Yahtzee game) {
-    dice = Collections.sort(game.dice);
+    ArrayList<Integer> dice = Collections.sort(game.dice);
     for (int i = 1; i < 5; i++) {
       if(dice.get(i) != dice.get(i - 1) + 1) {
         return "Possible Points in Large Straight: 0";
