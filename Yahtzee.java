@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Yahtzee {
   private Scanner sc;
-  private ArrayList<Integer> dice;
+  private static ArrayList<Integer> dice;
   private int[] scoreSheet;
 
   public static void main(String[] args) {
@@ -41,7 +41,7 @@ public class Yahtzee {
     int drop;
     int count = 0;
     do {
-      System.out.print("Choose which dice to reroll (Enter 0 to move to reroll): ");
+      System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<=dice.size()) {
         dice.remove(drop-1);
@@ -53,7 +53,7 @@ public class Yahtzee {
     checkDice();
     count = 0;
     do {
-      System.out.print("Choose which dice to reroll (Enter 0 to move to reroll): ");
+      System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<=dice.size()) {
         dice.remove(drop-1);
@@ -169,7 +169,7 @@ public class Yahtzee {
   /**
     This method checks to see if the user has a three of a kind  
    */
-  public String possibleThreeOfAKindPoints(Yahtzee game) {
+  public static String possibleThreeOfAKindPoints(Yahtzee game) {
     HashMap<int, int> diceCount = new HashMap<int, int>;
     sumOfDice = 0;
     for (int die : game.dice) {
@@ -189,7 +189,7 @@ public class Yahtzee {
   /**
     This method checks to see if the user has a four of a kind  
    */
-  public String possibleFourOfAKindPoints(Yahtzee game) {
+  public static String possibleFourOfAKindPoints(Yahtzee game) {
     HashMap<int, int> diceCount = new HashMap<int, int>;
     sumOfDice = 0;
     for (int die : game.dice) {
@@ -211,8 +211,8 @@ public class Yahtzee {
     2 occurances and another dice value has 3, the user has a
     possible full house.
    */
-  public String possibleFullHousePoints(Yahtzee game) {
-    HashMap<int, int> diceCount = new HashMap<int, int>;
+  public static String possibleFullHousePoints(Yahtzee game) {
+    HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>;
     sumOfDice = 0;
     for (int die : game.dice) {
       if (diceCount.get(die) == null) {
@@ -240,7 +240,7 @@ public class Yahtzee {
   /**
     This method checks all 3 possibilities of a small straight
    */
-  public String possibleSmallStraightPoints(Yahtzee game) {
+  public static String possibleSmallStraightPoints(Yahtzee game) {
     if(game.dice.includes(1) && game.dice.includes(2) && 
         game.dice.includes(3) && game.dice.includes(4)) {
       return "Possible Points in Small Straight: 30";
@@ -256,10 +256,10 @@ public class Yahtzee {
     return "Possible Points in Small Straight: 0";
   }
 
-  public String possibleLargeStraightPoints(Yahtzee game) {
-    dice = Arrays.sort(game.dice);
+  public static String possibleLargeStraightPoints(Yahtzee game) {
+    dice = Collections.sort(game.dice);
     for (int i = 1; i < 5; i++) {
-      if(dice[i] != dice[i-1] + 1) {
+      if(dice.get(i) != dice.get(i - 1) + 1) {
         return "Possible Points in Large Straight: 0";
       }
     }
@@ -267,8 +267,8 @@ public class Yahtzee {
   }
 
   public String possibleYahtzeePoints(Yahtzee game) {
-    dice = Arrays.sort(game.dice);
-    if (dice[0] == dice[4]) {
+    dice = Collections.sort(game.dice);
+    if (dice.get(0) == dice.get(4)) {
       return "Possible Points in Yahtzee: 50";
     }
     return "Possible Points in Yahtzee: 0";
