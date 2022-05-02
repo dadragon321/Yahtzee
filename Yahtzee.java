@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Map.Entry;
 import java.util.HashMap;
 import java.util.Collections;
 
@@ -143,12 +144,28 @@ public class Yahtzee {
   }
 
   public static void displayPossibleScores(Yahtzee game) {
-    System.out.print(possibleSingleUpperSectionPoints(game));
-    System.out.println(possibleThreeOfAKindPoints(game));
-    System.out.println(possibleFourOfAKindPoints(game));
-    //System.out.println(possibleFullHousePoints(game));
-    System.out.println(possibleSmallStraightPoints(game));
-    System.out.println(possibleLargeStraightPoints(game));
+    // upper section
+    int i = 1;
+    for (int score : possibleSingleUpperSectionPoints(game)) {
+      System.out.println("Possible Points in " + String.valueOf(i) + 
+        "'s: " + String.valueOf(score));
+      i++;
+    }
+    // lower section
+    System.out.println("Possible Points in 3 of a Kind: " + 
+        String.valueOf(possibleThreeOfAKindPoints(game)));
+    System.out.println("Possible Points in 4 of a Kind: " + 
+        String.valueOf(possibleFourOfAKindPoints(game)));
+    System.out.println("Possible Points in Full House: " + 
+        String.valueOf(possibleFullHousePoints(game)));
+    System.out.println("Possible Points in Small Straight: " + 
+        String.valueOf(possibleSmallStraightPoints(game)));
+    System.out.println("Possible Points in Large Straight: " + 
+        String.valueOf(possibleLargeStraightPoints(game)));
+    System.out.println("Possible Points in Yahtzee: " + 
+        String.valueOf(possibleYahtzeePoints(game)));
+    System.out.println("Possible Points in Chance: " + 
+        String.valueOf(possibleChancePoints(game))); 
   }
 
   /**
@@ -156,10 +173,9 @@ public class Yahtzee {
     the user possible points for each of 1's, 2's, 3's, 4's, 5's and
     6's  
    */
-  public static String possibleSingleUpperSectionPoints(Yahtzee game) {
-    String resultString = "";
+  public static ArrayList<Integer> possibleSingleUpperSectionPoints(Yahtzee game) {
+    ArrayList<Integer> result = new ArrayList<Integer>();
     int score;
-
     for (int i = 1; i <= 6; i++) {
       score = 0;
       for(int die : game.dice) {
@@ -167,17 +183,15 @@ public class Yahtzee {
           score += die;
         }
       }
-      resultString += "Possible Points in " + String.valueOf(i) + "'s: " +
-                      String.valueOf(score) + "\n";
+      result.add(score);
     }
-
-    return resultString;
+    return result;
   }
 
   /**
     This method checks to see if the user has a three of a kind  
    */
-  public static String possibleThreeOfAKindPoints(Yahtzee game) {
+  public static int possibleThreeOfAKindPoints(Yahtzee game) {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
     int sumOfDice = 0;
     for (int die : game.dice) {
@@ -187,17 +201,17 @@ public class Yahtzee {
         diceCount.put(die, diceCount.get(die) + 1);
         if (diceCount.get(die) == 3) {
           sumOfDice = sumDice(game);
-          return "Possible Points in 3 of a Kind: " + String.valueOf(sumOfDice);
+          return sumOfDice;
         }
       }
     }
-    return "Possible Points in 3 of a Kind: 0";
+    return 0;
   }
 
   /**
     This method checks to see if the user has a four of a kind  
    */
-  public static String possibleFourOfAKindPoints(Yahtzee game) {
+  public static int possibleFourOfAKindPoints(Yahtzee game) {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
     int sumOfDice = 0;
     for (int die : game.dice) {
@@ -207,20 +221,19 @@ public class Yahtzee {
         diceCount.put(die, diceCount.get(die) + 1);
         if (diceCount.get(die) == 4) {
           sumOfDice = sumDice(game);
-          return "Possible Points in 4 of a Kind: " + String.valueOf(sumOfDice);
+          return sumOfDice;
         }
       }
     }
-    return "Possible Points in 4 of a Kind: 0";
+    return 0;
   }
 
   /**
-    DOES NOT WORK
     This method checks for a full house. If one dice value has
     2 occurances and another dice value has 3, the user has a
     possible full house.
    */
-  public static String possibleFullHousePoints(Yahtzee game) {
+  public static int possibleFullHousePoints(Yahtzee game) {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
     int sumOfDice = 0;
     for (int die : game.dice) {
@@ -231,8 +244,7 @@ public class Yahtzee {
       }
 
       boolean twoOfAKind = false, threeOfAKind = false;
-
-      for (Map.Entry<Integer, Integer> elem : diceCount.entrySet()) {
+      for (Entry<Integer, Integer> elem : diceCount.entrySet()) {
         int count = ((int)elem.getValue());
         if (count == 2) {
           twoOfAKind = true;
@@ -241,11 +253,11 @@ public class Yahtzee {
         }
     }
       if (twoOfAKind && threeOfAKind) {
-        return "Possible Points in Full House: 25";
+        return 25;
       }
     }
 
-    return "Possible Points in Full House: 0";
+    return 0;
   }
 
   /**
@@ -268,7 +280,8 @@ public class Yahtzee {
   }
 
   public static String possibleLargeStraightPoints(Yahtzee game) {
-    ArrayList<Integer> dice = Collections.sort(game.dice);
+    ArrayList<Integer> dice = game.dice;
+    Collections.sort(dice);
     for (int i = 1; i < 5; i++) {
       if(dice.get(i) != dice.get(i - 1) + 1) {
         return "Possible Points in Large Straight: 0";
@@ -277,16 +290,20 @@ public class Yahtzee {
     return "Possible Points in Large Straight: 40";
   }
 
-  public String possibleYahtzeePoints(Yahtzee game) {
-    dice = Collections.sort(game.dice);
+  public static String possibleYahtzeePoints(Yahtzee game) {
+    ArrayList<Integer> dice = game.dice;
+    Collections.sort(dice);
     if (dice.get(0) == dice.get(4)) {
+      if (game.scoreSheet[11] == 50) {
+        return "Possible Points in Yahtzee: 100";
+      }
       return "Possible Points in Yahtzee: 50";
     }
     return "Possible Points in Yahtzee: 0";
   }
 
-  public int possibleChancePoints(Yahtzee game) {
-    return 0;
+  public static String possibleChancePoints(Yahtzee game) {
+    return "Possible Points in Chance: " + String.valueOf(sumDice(game));
   }
 
   /*
