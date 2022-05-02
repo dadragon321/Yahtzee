@@ -41,7 +41,7 @@ public class Yahtzee {
     int drop;
     int count = 0;
     do {
-      System.out.print("Choose which dice to reroll (Enter 0 to move to reroll): ");
+      System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<=dice.size()) {
         dice.remove(drop-1);
@@ -53,7 +53,7 @@ public class Yahtzee {
     checkDice();
     count = 0;
     do {
-      System.out.print("Choose which dice to reroll (Enter 0 to move to reroll): ");
+      System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<=dice.size()) {
         dice.remove(drop-1);
@@ -111,7 +111,7 @@ public class Yahtzee {
   }
 
   public int sumDice(Yahtzee game) {
-    sumOfDice = 0;
+    int sumOfDice = 0;
     for (int die : game.dice) {
       sumOfDice++;
     }
@@ -257,18 +257,18 @@ public class Yahtzee {
   }
 
   public String possibleLargeStraightPoints(Yahtzee game) {
-    dice = Arrays.sort(game.dice);
+    dice = Collections.sort(game.dice);
     for (int i = 1; i < 5; i++) {
-      if(dice[i] != dice[i-1] + 1) {
+      if(dice.get(i) != dice.get(i - 1) + 1) {
         return "Possible Points in Large Straight: 0";
       }
     }
     return "Possible Points in Large Straight: 40";
   }
 
-  public int possibleYahtzeePoints(Yahtzee game) {
-    dice = Arrays.sort(game.dice);
-    if (dice[0] == dice[4]) {
+  public String possibleYahtzeePoints(Yahtzee game) {
+    dice = Collections.sort(game.dice);
+    if (dice.get(0) == dice.get(4)) {
       return "Possible Points in Yahtzee: 50";
     }
     return "Possible Points in Yahtzee: 0";
