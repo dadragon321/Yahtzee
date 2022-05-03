@@ -240,7 +240,7 @@ public class Yahtzee {
     }
   */
 
-  public void checkDice() {
+  private void checkDice() {
 	  int count = 1;
     for(int val:dice) {
       System.out.println("Die " + count + ": " + val);
@@ -250,11 +250,11 @@ public class Yahtzee {
   }
 
 
-  public ArrayList<Integer> getDice() {
+  private ArrayList<Integer> getDice() {
     return dice;
   }
 
-  public int sumDice() {
+  private int sumDice() {
     int sumOfDice = 0;
     for (int die : Yahtzee.dice) {
       sumOfDice += die;
@@ -266,7 +266,7 @@ public class Yahtzee {
     bonus should be awarded or not. Returns 35
     if threshold is met, 0 otherwise.
    */
-  public int checkUpperBonus() {
+  private int checkUpperBonus() {
     int sum = 0;
     for (int i = 0; i < 6; i++) {
       sum += scoreSheet[i];
@@ -278,7 +278,7 @@ public class Yahtzee {
     }
   }
 
-  public void displayPossibleScores() {
+  private void displayPossibleScores() {
     // upper section
     /*
     for (int score : scoreSheet) {
@@ -334,7 +334,7 @@ public class Yahtzee {
    * upper section
    * @return an array of possible scores for the 6 rows
    */
-  public ArrayList<Integer> possibleSingleUpperSectionPoints() {
+  private ArrayList<Integer> possibleSingleUpperSectionPoints() {
     ArrayList<Integer> result = new ArrayList<Integer>();
     int score;
     for (int i = 1; i <= 6; i++) {
@@ -354,7 +354,7 @@ public class Yahtzee {
    * @return the sum of all dice if a 3 of a kind is present, 0
    * otherwise
    */
-  public int possibleThreeOfAKindPoints() {
+  private int possibleThreeOfAKindPoints() {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
     int sumOfDice = 0;
     for (int die : Yahtzee.dice) {
@@ -376,7 +376,7 @@ public class Yahtzee {
    * @return the sum of all dice if 4 of a kind is present, 0
    * otherwise
    */
-  public int possibleFourOfAKindPoints() {
+  private int possibleFourOfAKindPoints() {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
     int sumOfDice = 0;
     for (int die : Yahtzee.dice) {
@@ -397,7 +397,7 @@ public class Yahtzee {
    * Calculates the possible points in the full house row
    * @return 25 if user has a full house, 0 otherwise
    */
-  public int possibleFullHousePoints() {
+  private int possibleFullHousePoints() {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
     for (int die : Yahtzee.dice) {
       if (diceCount.get(die) == null) {
@@ -428,7 +428,7 @@ public class Yahtzee {
    * [(1, 2, 3, 4), (2, 3, 4, 5), (3, 4, 5, 6)]
    * @return 30 if the user has a small straight, 0 otherwise
    */
-  public int possibleSmallStraightPoints() {
+  private int possibleSmallStraightPoints() {
     if(Yahtzee.dice.contains(1) && Yahtzee.dice.contains(2) &&
       Yahtzee.dice.contains(3) && Yahtzee.dice.contains(4)) {
       return 30;
@@ -449,7 +449,7 @@ public class Yahtzee {
    * [(1, 2, 3, 4, 5), (2, 3, 4, 5, 6)]
    * @return 40 if the user has a small straight, 0 otherwise
    */
-  public int possibleLargeStraightPoints() {
+  private int possibleLargeStraightPoints() {
     ArrayList<Integer> dice = Yahtzee.dice;
     for (int i = 1; i < 5; i++) {
       if(dice.get(i) != dice.get(i - 1) + 1) {
@@ -465,7 +465,7 @@ public class Yahtzee {
    * previously scored Yahtzee, 50 if the user has 5 dice of the
    * same value and no previous Yahtzee, and 0 otherwise
    */
-  public int possibleYahtzeePoints() {
+  private int possibleYahtzeePoints() {
     ArrayList<Integer> dice = Yahtzee.dice;
     Collections.sort(dice);
     if (dice.get(0) == dice.get(4)) {
@@ -481,7 +481,7 @@ public class Yahtzee {
    * Calculates the possible points for the chance row
    * @return the sum of all dice
    */
-  public int possibleChancePoints() {
+  private int possibleChancePoints() {
     return sumDice();
   }
 
