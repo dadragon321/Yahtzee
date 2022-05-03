@@ -63,7 +63,9 @@ public class Yahtzee {
      * to score their turn after each roll
      */
 
-
+    displayPossibleScores(this);
+    promptUserToScoreOrNot();
+    
     do {
       System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
@@ -94,6 +96,19 @@ public class Yahtzee {
       dice.add((int)(Math.random()*6 + 1));
   }
 
+  private boolean promptUserToScoreOrNot() {  
+    String userScoreChoice;
+    do {
+      System.out.print("Do you want to score this roll?");
+      userScoreChoice = sc.nextLine();
+    } while (!(userScoreChoice.equals("y") || userScoreChoice.equals("n")));
+    if (userScoreChoice.equals("y")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
   private int score(int scoreRow) {
     int result = 0;
     switch (scoreRow) {
