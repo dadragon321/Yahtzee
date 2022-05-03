@@ -82,6 +82,14 @@ public class Yahtzee {
     roll(count);
     Collections.sort(dice);
     checkDice();
+
+    displayPossibleScores();
+    if (promptUserToScoreOrNot()) {
+      System.out.println(getScoreRow());
+      turn++;
+      return;
+    }
+
     count = 0;
     do {
       System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
@@ -95,6 +103,12 @@ public class Yahtzee {
     roll(count);
     Collections.sort(dice);
     checkDice();
+    displayPossibleScores();
+    if (promptUserToScoreOrNot()) {
+      System.out.println(getScoreRow());
+      turn++;
+      return;
+    }
 
     dice.clear();
   }
@@ -189,11 +203,11 @@ public class Yahtzee {
     // If statement handles bonus yahtzee
     if (result == 100) {
       this.scoreSheet[13] += result;
-      dice = null;
+      dice.clear();
       return "Scored " + String.valueOf(result) + " in Bonus Yahtzee";
     } else {
       this.scoreSheet[scoreRow-1] = result;
-      dice = null;
+      dice.clear();
       return "Scored " + String.valueOf(result) + " in row " + String.valueOf(scoreRow);
     }
   }
