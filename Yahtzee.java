@@ -8,13 +8,17 @@ public class Yahtzee {
   private Scanner sc;
   private static ArrayList<Integer> dice;
   private int[] scoreSheet;
+  private int turn;
 
   public static void main(String[] args) {
     Yahtzee game = new Yahtzee();
-    game.turn();
+    while (game.turn < 14) {
+      game.turn();
+    }
   }
 
   public Yahtzee() {
+    turn = 1;
     sc = new Scanner(System.in);
     dice = new ArrayList<Integer>();
     /*
@@ -36,6 +40,9 @@ public class Yahtzee {
       14: Upper Bonus
     */
     scoreSheet = new int[15];
+    for (int i = 0; i < 15; i++) {
+      scoreSheet[i] = 0;
+    }
   }
 
   public void turn() {
@@ -45,10 +52,18 @@ public class Yahtzee {
     int count = 0;
     /*
       testing score display
-    */
+    
     System.out.println("before");
     displayPossibleScores(this);
     System.out.println("after");
+    */
+
+    /**
+     * Need to change the following code so that the user can choose
+     * to score their turn after each roll
+     */
+
+
     do {
       System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
@@ -79,7 +94,68 @@ public class Yahtzee {
       dice.add((int)(Math.random()*6 + 1));
   }
 
-  private int score(ArrayList<Integer> roll) {
+  private int score(int scoreRow) {
+    int result = 0;
+    switch (scoreRow) {
+      // Aces
+      case 1:
+        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        break;
+      // Twos
+      case 2:
+        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        break;
+      // Threes
+      case 3:
+        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        break;
+      // Fours
+      case 4:
+        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        break;
+      // Fives
+      case 5:
+        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        break;
+      // Sixes
+      case 6:
+        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        break;
+      // 3 of a Kind
+      case 7:
+        result = possibleThreeOfAKindPoints(this);
+        break;
+      // 4 of a Kind
+      case 8:
+        result = possibleFourOfAKindPoints(this);
+        break;
+      // Full House
+      case 9:
+        result = possibleFullHousePoints(this);
+        break;
+      // Small Straight
+      case 10:
+        result = possibleSmallStraightPoints(this);
+        break;
+      // Large Straight
+      case 11:
+        result = possibleLargeStraightPoints(this);
+        break;
+      // Yahtzee
+      case 12:
+        result = possibleYahtzeePoints(this);
+        break;
+      // Chance
+      case 13:
+        result = possibleChancePoints(this);
+        break;
+    }
+    // If statement handles bonus yahtzee
+    if (result == 100) {
+      this.scoreSheet[13] += result;
+    } else {
+      this.scoreSheet[scoreRow-1] = result;
+    }
     return 0;
   }
 
