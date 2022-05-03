@@ -11,11 +11,15 @@ public class Yahtzee {
   private int turn;
 
   public static void main(String[] args) {
+    int totalScore = 0;
     Yahtzee game = new Yahtzee();
     while (game.turn < 14) {
       game.turn();
     }
-    scoreSheet[14] = upperBonus() ? 35 : 0;
+    scoreSheet[14] = upperTotalScore() > 63 ? 35 : 0;
+    for (int score : scoreSheet) {
+      totalScore += score;
+    }
   }
 
   public Yahtzee() {
@@ -481,11 +485,11 @@ public class Yahtzee {
     return sumDice();
   }
 
-  public static boolean upperBonus() {
+  public static int upperTotalScore() {
     int upperTotal = 0;
     for (int i = 0; i < 6; i++) {
       upperTotal += scoreSheet[i];
     }
-    return upperTotal > 63;
+    return upperTotal;
   }
 }
