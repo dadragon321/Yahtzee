@@ -7,7 +7,7 @@ import java.util.Collections;
 public class Yahtzee {
   private Scanner sc;
   private static ArrayList<Integer> dice;
-  private int[] scoreSheet;
+  private static int[] scoreSheet;
   private int turn;
 
   public static void main(String[] args) {
@@ -15,6 +15,7 @@ public class Yahtzee {
     while (game.turn < 14) {
       game.turn();
     }
+    scoreSheet[14] = upperBonus() ? 35 : 0;
   }
 
   public Yahtzee() {
@@ -478,5 +479,13 @@ public class Yahtzee {
    */
   public int possibleChancePoints() {
     return sumDice();
+  }
+
+  public static boolean upperBonus() {
+    int upperTotal = 0;
+    for (int i = 0; i < 6; i++) {
+      upperTotal += scoreSheet[i];
+    }
+    return upperTotal > 63;
   }
 }
