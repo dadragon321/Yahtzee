@@ -103,12 +103,10 @@ public class Yahtzee {
     roll(count);
     Collections.sort(dice);
     checkDice();
-
     displayPossibleScores();
     System.out.println(getScoreRow());
     dice.clear();
     turn++;
-
   }
 
   public void roll(int n) {
