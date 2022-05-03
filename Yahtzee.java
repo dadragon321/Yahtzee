@@ -277,53 +277,53 @@ public class Yahtzee {
 
   public void displayPossibleScores() {
     // upper section
-    /*
+    
     for (int score : scoreSheet) {
       System.out.println(score);
     }
-    */
+    
     int i = 1;
     for (int score : possibleSingleUpperSectionPoints()) {
       if (scoreSheet[i-1] == -1) {
         System.out.println("ROW " + String.valueOf(i) + ":  Possible Points in " + String.valueOf(i) +
         "'s............." + String.valueOf(score));
       }
-      i++;
     }
+    i++;
     // lower section
     if(scoreSheet[i-1] == -1) {
       System.out.println("ROW 7:  Possible Points in 3 of a Kind....." +
           String.valueOf(possibleThreeOfAKindPoints()));
-      i++;
     }
+    i++;
     if(scoreSheet[i-1] == -1) {
       System.out.println("ROW 8:  Possible Points in 4 of a Kind....." + 
           String.valueOf(possibleFourOfAKindPoints()));
-      i++;
     }
+    i++;
     if(scoreSheet[i-1] == -1) {
       System.out.println("ROW 9:  Possible Points in Full House......" +
           String.valueOf(possibleFullHousePoints()));
-      i++;
     }
+    i++;
     if(scoreSheet[i-1] == -1) {
       System.out.println("ROW 10: Possible Points in Small Straight.." +
           String.valueOf(possibleSmallStraightPoints()));
-      i++;
     }
+    i++;
     if(scoreSheet[i-1] == -1) {
       System.out.println("ROW 11: Possible Points in Large Straight.." + 
           String.valueOf(possibleLargeStraightPoints()));
-      i++;
     }
+    i++;
      System.out.println("ROW 12: Possible Points in Yahtzee........." + 
          String.valueOf(possibleYahtzeePoints()));
     i++;
     if(scoreSheet[i-1] == -1) {
       System.out.println("ROW 13: Possible Points in Chance.........." +
           String.valueOf(possibleChancePoints()));
-      i++;
     }
+    i++;
   }
 
   /**
