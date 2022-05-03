@@ -72,7 +72,7 @@ public class Yahtzee {
     }
 
     do {
-      System.out.print("Choose which dice to reroll by index (Enter 0 to get reroll): ");
+      System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<=dice.size()) {
         dice.remove(drop-1);
@@ -93,7 +93,7 @@ public class Yahtzee {
 
     count = 0;
     do {
-      System.out.print("Choose which dice to reroll by index (Enter 0 to get reroll): ");
+      System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<=dice.size()) {
         dice.remove(drop-1);
@@ -122,7 +122,7 @@ public class Yahtzee {
   private boolean promptUserToScoreOrNot() {
     String userScoreChoice;
     do {
-      System.out.println("Do you want to score this roll? (y or n)");
+      System.out.print("Do you want to score this roll? (y or n): ");
       userScoreChoice = sc.next();
     } while (!(userScoreChoice.equals("y") || userScoreChoice.equals("n")));
     if (userScoreChoice.equals("y")) {
@@ -239,7 +239,7 @@ public class Yahtzee {
   public void checkDice() {
 	  int count = 1;
     for(int val:dice) {
-      System.out.println("Dice " + count + ": " + val + " ");
+      System.out.println("Die " + count + ": " + val);
       count++;
     }
     System.out.println();
