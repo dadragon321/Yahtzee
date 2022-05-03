@@ -292,7 +292,7 @@ public class Yahtzee {
     }
     i++;
     if(scoreSheet[i-1] == -1) {
-      System.out.println("ROW 8:  Possible Points in 4 of a Kind....." + 
+      System.out.println("ROW 8:  Possible Points in 4 of a Kind....." +
           String.valueOf(possibleFourOfAKindPoints()));
     }
     i++;
@@ -307,11 +307,11 @@ public class Yahtzee {
     }
     i++;
     if(scoreSheet[i-1] == -1) {
-      System.out.println("ROW 11: Possible Points in Large Straight.." + 
+      System.out.println("ROW 11: Possible Points in Large Straight.." +
           String.valueOf(possibleLargeStraightPoints()));
     }
     i++;
-     System.out.println("ROW 12: Possible Points in Yahtzee........." + 
+     System.out.println("ROW 12: Possible Points in Yahtzee........." +
          String.valueOf(possibleYahtzeePoints()));
     i++;
     if(scoreSheet[i-1] == -1) {
