@@ -277,6 +277,9 @@ public class Yahtzee {
 
   public void displayPossibleScores() {
     // upper section
+    for (int score : scoreSheet) {
+      System.out.println(score);
+    }
     int i = 1;
     for (int score : possibleSingleUpperSectionPoints()) {
       if (scoreSheet[i-1] == -1) {
@@ -286,11 +289,6 @@ public class Yahtzee {
       i++;
     }
     // lower section
-    if(scoreSheet[i-1] == -1) {
-      System.out.println("ROW 7:  Possible Points in 3 of a Kind....." + 
-          String.valueOf(possibleThreeOfAKindPoints()));
-      i++;
-    }
     if(scoreSheet[i-1] == -1) {
       System.out.println("ROW 7:  Possible Points in 3 of a Kind....." + 
           String.valueOf(possibleThreeOfAKindPoints()));
@@ -309,6 +307,11 @@ public class Yahtzee {
     if(scoreSheet[i-1] == -1) {
       System.out.println("ROW 10: Possible Points in Small Straight.." + 
           String.valueOf(possibleSmallStraightPoints()));
+      i++;
+    }
+    if(scoreSheet[i-1] == -1) {
+      System.out.println("ROW 11: Possible Points in Large Straight.." + 
+          String.valueOf(possibleLargeStraightPoints()));
       i++;
     }
      System.out.println("ROW 12: Possible Points in Yahtzee........." + 
