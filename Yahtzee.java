@@ -59,13 +59,18 @@ public class Yahtzee {
     */
 
     /**
-     * Need to change the following code so that the user can choose
-     * to score their turn after each roll
+     * displays the possible scores after first roll and asks the user if
+     * they want to score the turn or not.
      */
+    displayPossibleScores();
+    if (promptUserToScoreOrNot()) {
+      System.out.println(getScoreRow());
+      turn++;
+    }
 
-    displayPossibleScores(this);
-    promptUserToScoreOrNot();
-    
+    /**
+     * Need to change this to work with code above
+     */
     do {
       System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
@@ -96,6 +101,10 @@ public class Yahtzee {
       dice.add((int)(Math.random()*6 + 1));
   }
 
+  /**
+   * Asks user to decide whether to score their roll or not
+   * @return true if use says yes, false if they say no
+   */
   private boolean promptUserToScoreOrNot() {  
     String userScoreChoice;
     do {
@@ -108,70 +117,80 @@ public class Yahtzee {
       return false;
     }
   }
-  
-  private int score(int scoreRow) {
+
+  private String getScoreRow() {
+    int scoreRow = -1;
+      do {
+        System.out.print("Select Row to Score (See rows above): ");
+        scoreRow = sc.nextInt();
+      } while(scoreRow <= 0 || scoreRow > 13);
+      return score(scoreRow);
+  }
+
+  private String score(int scoreRow) {
     int result = 0;
     switch (scoreRow) {
       // Aces
       case 1:
-        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        result = possibleSingleUpperSectionPoints().get(scoreRow-1);
         break;
       // Twos
       case 2:
-        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        result = possibleSingleUpperSectionPoints().get(scoreRow-1);
         break;
       // Threes
       case 3:
-        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        result = possibleSingleUpperSectionPoints().get(scoreRow-1);
         break;
       // Fours
       case 4:
-        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        result = possibleSingleUpperSectionPoints().get(scoreRow-1);
         break;
       // Fives
       case 5:
-        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        result = possibleSingleUpperSectionPoints().get(scoreRow-1);
         break;
       // Sixes
       case 6:
-        result = possibleSingleUpperSectionPoints(this).get(scoreRow-1);
+        result = possibleSingleUpperSectionPoints().get(scoreRow-1);
         break;
       // 3 of a Kind
       case 7:
-        result = possibleThreeOfAKindPoints(this);
+        result = possibleThreeOfAKindPoints();
         break;
       // 4 of a Kind
       case 8:
-        result = possibleFourOfAKindPoints(this);
+        result = possibleFourOfAKindPoints();
         break;
       // Full House
       case 9:
-        result = possibleFullHousePoints(this);
+        result = possibleFullHousePoints();
         break;
       // Small Straight
       case 10:
-        result = possibleSmallStraightPoints(this);
+        result = possibleSmallStraightPoints();
         break;
       // Large Straight
       case 11:
-        result = possibleLargeStraightPoints(this);
+        result = possibleLargeStraightPoints();
         break;
       // Yahtzee
       case 12:
-        result = possibleYahtzeePoints(this);
+        result = possibleYahtzeePoints();
         break;
       // Chance
       case 13:
-        result = possibleChancePoints(this);
+        result = possibleChancePoints();
         break;
     }
     // If statement handles bonus yahtzee
     if (result == 100) {
       this.scoreSheet[13] += result;
+      return "Scored " + String.valueOf(result) + " in Bonus Yahtzee";
     } else {
       this.scoreSheet[scoreRow-1] = result;
+      return "Scored " + String.valueOf(result) + " in row " + String.valueOf(scoreRow);
     }
-    return 0;
   }
 
   /*
@@ -202,17 +221,20 @@ public class Yahtzee {
   */
 
   public void checkDice() {
-    for(int val:dice)
-      System.out.println(val);
+    for(int val:dice) {
+      System.out.print(val);
+      System.out.print(" ");
+    }
+    System.out.println();
   }
 
   public ArrayList<Integer> getDice() {
     return dice;
   }
 
-  public static int sumDice(Yahtzee game) {
+  public int sumDice() {
     int sumOfDice = 0;
-    for (int die : game.dice) {
+    for (int die : Yahtzee.dice) {
       sumOfDice += die;
     }
     return sumOfDice;
@@ -222,7 +244,7 @@ public class Yahtzee {
     bonus should be awarded or not. Returns 35
     if threshold is met, 0 otherwise.
    */
-  public int checkUpperBonus(Yahtzee game) {
+  public int checkUpperBonus() {
     int sum = 0;
     for (int i = 0; i < 6; i++) {
       sum += scoreSheet[i];
@@ -234,43 +256,42 @@ public class Yahtzee {
     }
   }
 
-  public static void displayPossibleScores(Yahtzee game) {
+  public void displayPossibleScores() {
     // upper section
     int i = 1;
-    for (int score : possibleSingleUpperSectionPoints(game)) {
-      System.out.println("Possible Points in " + String.valueOf(i) + 
-        "'s: " + String.valueOf(score));
+    for (int score : possibleSingleUpperSectionPoints()) {
+      System.out.println("ROW " + String.valueOf(i) + ":  Possible Points in " + String.valueOf(i) + 
+        "'s............." + String.valueOf(score));
       i++;
     }
     // lower section
-    System.out.println("Possible Points in 3 of a Kind: " + 
-        String.valueOf(possibleThreeOfAKindPoints(game)));
-    System.out.println("Possible Points in 4 of a Kind: " + 
-        String.valueOf(possibleFourOfAKindPoints(game)));
-    System.out.println("Possible Points in Full House: " + 
-        String.valueOf(possibleFullHousePoints(game)));
-    System.out.println("Possible Points in Small Straight: " + 
-        String.valueOf(possibleSmallStraightPoints(game)));
-    System.out.println("Possible Points in Large Straight: " + 
-        String.valueOf(possibleLargeStraightPoints(game)));
-    System.out.println("Possible Points in Yahtzee: " + 
-        String.valueOf(possibleYahtzeePoints(game)));
-    System.out.println("Possible Points in Chance: " + 
-        String.valueOf(possibleChancePoints(game))); 
+    System.out.println("ROW 7:  Possible Points in 3 of a Kind....." + 
+        String.valueOf(possibleThreeOfAKindPoints()));
+    System.out.println("ROW 8:  Possible Points in 4 of a Kind....." + 
+        String.valueOf(possibleFourOfAKindPoints()));
+    System.out.println("ROW 9:  Possible Points in Full House......" + 
+        String.valueOf(possibleFullHousePoints()));
+    System.out.println("ROW 10: Possible Points in Small Straight.." + 
+        String.valueOf(possibleSmallStraightPoints()));
+    System.out.println("ROW 11: Possible Points in Large Straight.." + 
+        String.valueOf(possibleLargeStraightPoints()));
+    System.out.println("ROW 12: Possible Points in Yahtzee........." + 
+        String.valueOf(possibleYahtzeePoints()));
+    System.out.println("ROW 13: Possible Points in Chance.........." + 
+        String.valueOf(possibleChancePoints())); 
   }
 
   /**
    * This method calculates the possible points for every row in the
    * upper section
-   * @param game
    * @return an array of possible scores for the 6 rows 
    */
-  public static ArrayList<Integer> possibleSingleUpperSectionPoints(Yahtzee game) {
+  public ArrayList<Integer> possibleSingleUpperSectionPoints() {
     ArrayList<Integer> result = new ArrayList<Integer>();
     int score;
     for (int i = 1; i <= 6; i++) {
       score = 0;
-      for(int die : game.dice) {
+      for(int die : Yahtzee.dice) {
         if (die == i) {
           score += die;
         }
@@ -282,20 +303,19 @@ public class Yahtzee {
 
   /**
    * Calculates possible points in the 3 of a kind row
-   * @param game
    * @return the sum of all dice if a 3 of a kind is present, 0
    * otherwise
    */
-  public static int possibleThreeOfAKindPoints(Yahtzee game) {
+  public int possibleThreeOfAKindPoints() {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
     int sumOfDice = 0;
-    for (int die : game.dice) {
+    for (int die : Yahtzee.dice) {
       if (diceCount.get(die) == null) {
         diceCount.put(die, 1);
       } else {
         diceCount.put(die, diceCount.get(die) + 1);
         if (diceCount.get(die) == 3) {
-          sumOfDice = sumDice(game);
+          sumOfDice = sumDice();
           return sumOfDice;
         }
       }
@@ -305,20 +325,19 @@ public class Yahtzee {
 
   /**
    * Calculates possible points in the 4 of a kind row
-   * @param game
    * @return the sum of all dice if 4 of a kind is present, 0
    * otherwise
    */
-  public static int possibleFourOfAKindPoints(Yahtzee game) {
+  public int possibleFourOfAKindPoints() {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
     int sumOfDice = 0;
-    for (int die : game.dice) {
+    for (int die : Yahtzee.dice) {
       if (diceCount.get(die) == null) {
         diceCount.put(die, 1);
       } else {
         diceCount.put(die, diceCount.get(die) + 1);
         if (diceCount.get(die) == 4) {
-          sumOfDice = sumDice(game);
+          sumOfDice = sumDice();
           return sumOfDice;
         }
       }
@@ -328,13 +347,11 @@ public class Yahtzee {
 
   /**
    * Calculates the possible points in the full house row
-   * @param game
    * @return 25 if user has a full house, 0 otherwise
    */
-  public static int possibleFullHousePoints(Yahtzee game) {
+  public int possibleFullHousePoints() {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
-    int sumOfDice = 0;
-    for (int die : game.dice) {
+    for (int die : Yahtzee.dice) {
       if (diceCount.get(die) == null) {
         diceCount.put(die, 1);
       } else {
@@ -361,20 +378,19 @@ public class Yahtzee {
   /**
    * Calculates possible points in small straight row
    * [(1, 2, 3, 4), (2, 3, 4, 5), (3, 4, 5, 6)]
-   * @param game
    * @return 30 if the user has a small straight, 0 otherwise
    */
-  public static int possibleSmallStraightPoints(Yahtzee game) {
-    if(game.dice.contains(1) && game.dice.contains(2) && 
-        game.dice.contains(3) && game.dice.contains(4)) {
+  public int possibleSmallStraightPoints() {
+    if(Yahtzee.dice.contains(1) && Yahtzee.dice.contains(2) && 
+      Yahtzee.dice.contains(3) && Yahtzee.dice.contains(4)) {
       return 30;
     } 
-    else if(game.dice.contains(2) && game.dice.contains(3) && 
-        game.dice.contains(4) && game.dice.contains(5)) {
+    else if(Yahtzee.dice.contains(2) && Yahtzee.dice.contains(3) && 
+      Yahtzee.dice.contains(4) && Yahtzee.dice.contains(5)) {
       return 30;
     } 
-    else if(game.dice.contains(3) && game.dice.contains(4) && 
-        game.dice.contains(5) && game.dice.contains(6)) {
+    else if(Yahtzee.dice.contains(3) && Yahtzee.dice.contains(4) && 
+      Yahtzee.dice.contains(5) && Yahtzee.dice.contains(6)) {
       return 30;
     }
     return 0;
@@ -383,11 +399,10 @@ public class Yahtzee {
   /**
    * Calculates possible points in large straight row
    * [(1, 2, 3, 4, 5), (2, 3, 4, 5, 6)]
-   * @param game
    * @return 40 if the user has a small straight, 0 otherwise
    */
-  public static int possibleLargeStraightPoints(Yahtzee game) {
-    ArrayList<Integer> dice = game.dice;
+  public int possibleLargeStraightPoints() {
+    ArrayList<Integer> dice = Yahtzee.dice;
     Collections.sort(dice);
     for (int i = 1; i < 5; i++) {
       if(dice.get(i) != dice.get(i - 1) + 1) {
@@ -399,16 +414,15 @@ public class Yahtzee {
 
   /**
    * Calculates possible points in Yahtzee row
-   * @param game
    * @return 100 if the user has 5 dice of the same value and a 
    * previously scored Yahtzee, 50 if the user has 5 dice of the
    * same value and no previous Yahtzee, and 0 otherwise
    */
-  public static int possibleYahtzeePoints(Yahtzee game) {
-    ArrayList<Integer> dice = game.dice;
+  public int possibleYahtzeePoints() {
+    ArrayList<Integer> dice = Yahtzee.dice;
     Collections.sort(dice);
     if (dice.get(0) == dice.get(4)) {
-      if (game.scoreSheet[11] == 50) {
+      if (scoreSheet[11] == 50) {
         return 100;
       }
       return 50;
@@ -418,11 +432,10 @@ public class Yahtzee {
 
   /**
    * Calculates the possible points for the chance row
-   * @param game
    * @return the sum of all dice
    */
-  public static int possibleChancePoints(Yahtzee game) {
-    return sumDice(game);
+  public int possibleChancePoints() {
+    return sumDice();
   }
 
   /*
