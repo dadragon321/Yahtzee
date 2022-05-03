@@ -47,6 +47,7 @@ public class Yahtzee {
 
   public void turn() {
     roll(5);
+    Collections.sort(dice);
     checkDice();
     int drop;
     int count = 0;
@@ -69,9 +70,6 @@ public class Yahtzee {
       return;
     }
 
-    /**
-     * Need to change this to work with code above
-     */
     do {
       System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
@@ -82,6 +80,7 @@ public class Yahtzee {
     } while(drop !=0 && dice.size()>0);
 
     roll(count);
+    Collections.sort(dice);
     checkDice();
     count = 0;
     do {
@@ -94,6 +93,7 @@ public class Yahtzee {
     } while(drop !=0 && dice.size()>0);
 
     roll(count);
+    Collections.sort(dice);
     checkDice();
 
     dice.clear();
@@ -429,7 +429,6 @@ public class Yahtzee {
    */
   public int possibleLargeStraightPoints() {
     ArrayList<Integer> dice = Yahtzee.dice;
-    Collections.sort(dice);
     for (int i = 1; i < 5; i++) {
       if(dice.get(i) != dice.get(i - 1) + 1) {
         return 0;
