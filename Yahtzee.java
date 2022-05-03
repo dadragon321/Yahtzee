@@ -71,7 +71,7 @@ public class Yahtzee {
     }
 
     do {
-      System.out.print("Choose which dice to reroll by index (Enter 0 to get reroll): ");
+      System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<=dice.size()) {
         dice.remove(drop-1);
@@ -92,7 +92,7 @@ public class Yahtzee {
 
     count = 0;
     do {
-      System.out.print("Choose which dice to reroll by index (Enter 0 to get reroll): ");
+      System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<=dice.size()) {
         dice.remove(drop-1);
