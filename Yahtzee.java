@@ -236,11 +236,14 @@ public class Yahtzee {
   */
 
   public void checkDice() {
+	  int count = 1;
     for(int val:dice) {
-      System.out.print(val + " ");
+      System.out.println("Dice " + count + ": " + val + " ");
+      count++;
     }
     System.out.println();
   }
+
 
   public ArrayList<Integer> getDice() {
     return dice;
