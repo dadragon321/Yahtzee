@@ -289,8 +289,8 @@ public class Yahtzee {
         System.out.println("ROW " + String.valueOf(i) + ":  Possible Points in " + String.valueOf(i) +
         "'s............." + String.valueOf(score));
       }
+      i++;
     }
-    i++;
     // lower section
     if(scoreSheet[i-1] == -1) {
       System.out.println("ROW 7:  Possible Points in 3 of a Kind....." +
