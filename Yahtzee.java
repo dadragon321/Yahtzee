@@ -103,6 +103,7 @@ public class Yahtzee {
     roll(count);
     Collections.sort(dice);
     checkDice();
+
     displayPossibleScores();
     if (promptUserToScoreOrNot()) {
       System.out.println(getScoreRow());
