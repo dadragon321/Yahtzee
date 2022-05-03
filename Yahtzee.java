@@ -189,9 +189,11 @@ public class Yahtzee {
     // If statement handles bonus yahtzee
     if (result == 100) {
       this.scoreSheet[13] += result;
+      dice = null;
       return "Scored " + String.valueOf(result) + " in Bonus Yahtzee";
     } else {
       this.scoreSheet[scoreRow-1] = result;
+      dice = null;
       return "Scored " + String.valueOf(result) + " in row " + String.valueOf(scoreRow);
     }
   }
