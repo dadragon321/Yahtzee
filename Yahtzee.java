@@ -278,11 +278,11 @@ public class Yahtzee {
 
   public void displayPossibleScores() {
     // upper section
-    
+    /*
     for (int score : scoreSheet) {
       System.out.println(score);
     }
-    
+    */
     int i = 1;
     for (int score : possibleSingleUpperSectionPoints()) {
       if (scoreSheet[i-1] == -1) {
