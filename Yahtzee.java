@@ -122,7 +122,7 @@ public class Yahtzee {
     String userScoreChoice;
     do {
       System.out.println("Do you want to score this roll? (y or n)");
-      userScoreChoice = sc.nextLine();
+      userScoreChoice = sc.next();
     } while (!(userScoreChoice.equals("y") || userScoreChoice.equals("n")));
     if (userScoreChoice.equals("y")) {
       return true;
