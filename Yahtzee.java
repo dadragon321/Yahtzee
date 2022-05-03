@@ -169,9 +169,10 @@ public class Yahtzee {
   }
 
   /**
-    This method checks each of the upper section boxes. It provides
-    the user possible points for each of 1's, 2's, 3's, 4's, 5's and
-    6's  
+   * This method calculates the possible points for every row in the
+   * upper section
+   * @param game
+   * @return an array of possible scores for the 6 rows 
    */
   public static ArrayList<Integer> possibleSingleUpperSectionPoints(Yahtzee game) {
     ArrayList<Integer> result = new ArrayList<Integer>();
@@ -189,7 +190,10 @@ public class Yahtzee {
   }
 
   /**
-    This method checks to see if the user has a three of a kind  
+   * Calculates possible points in the 3 of a kind row
+   * @param game
+   * @return the sum of all dice if a 3 of a kind is present, 0
+   * otherwise
    */
   public static int possibleThreeOfAKindPoints(Yahtzee game) {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
@@ -209,7 +213,10 @@ public class Yahtzee {
   }
 
   /**
-    This method checks to see if the user has a four of a kind  
+   * Calculates possible points in the 4 of a kind row
+   * @param game
+   * @return the sum of all dice if 4 of a kind is present, 0
+   * otherwise
    */
   public static int possibleFourOfAKindPoints(Yahtzee game) {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
@@ -229,9 +236,9 @@ public class Yahtzee {
   }
 
   /**
-    This method checks for a full house. If one dice value has
-    2 occurances and another dice value has 3, the user has a
-    possible full house.
+   * Calculates the possible points in the full house row
+   * @param game
+   * @return 25 if user has a full house, 0 otherwise
    */
   public static int possibleFullHousePoints(Yahtzee game) {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
@@ -261,7 +268,10 @@ public class Yahtzee {
   }
 
   /**
-    This method checks all 3 possibilities of a small straight
+   * Calculates possible points in small straight row
+   * [(1, 2, 3, 4), (2, 3, 4, 5), (3, 4, 5, 6)]
+   * @param game
+   * @return 30 if the user has a small straight, 0 otherwise
    */
   public static int possibleSmallStraightPoints(Yahtzee game) {
     if(game.dice.contains(1) && game.dice.contains(2) && 
@@ -279,6 +289,12 @@ public class Yahtzee {
     return 0;
   }
 
+  /**
+   * Calculates possible points in large straight row
+   * [(1, 2, 3, 4, 5), (2, 3, 4, 5, 6)]
+   * @param game
+   * @return 40 if the user has a small straight, 0 otherwise
+   */
   public static int possibleLargeStraightPoints(Yahtzee game) {
     ArrayList<Integer> dice = game.dice;
     Collections.sort(dice);
@@ -290,6 +306,13 @@ public class Yahtzee {
     return 40;
   }
 
+  /**
+   * Calculates possible points in Yahtzee row
+   * @param game
+   * @return 100 if the user has 5 dice of the same value and a 
+   * previously scored Yahtzee, 50 if the user has 5 dice of the
+   * same value and no previous Yahtzee, and 0 otherwise
+   */
   public static int possibleYahtzeePoints(Yahtzee game) {
     ArrayList<Integer> dice = game.dice;
     Collections.sort(dice);
@@ -302,6 +325,11 @@ public class Yahtzee {
     return 0;
   }
 
+  /**
+   * Calculates the possible points for the chance row
+   * @param game
+   * @return the sum of all dice
+   */
   public static int possibleChancePoints(Yahtzee game) {
     return sumDice(game);
   }
