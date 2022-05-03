@@ -295,11 +295,9 @@ public class Yahtzee {
           String.valueOf(possibleSmallStraightPoints()));
       i++;
     }
-    if(scoreSheet[i-1] == -1) {
-      System.out.println("ROW 12: Possible Points in Yahtzee........." + 
-          String.valueOf(possibleYahtzeePoints()));
-      i++;
-    }
+     System.out.println("ROW 12: Possible Points in Yahtzee........." + 
+         String.valueOf(possibleYahtzeePoints()));
+    i++;
     if(scoreSheet[i-1] == -1) {
       System.out.println("ROW 13: Possible Points in Chance.........." + 
           String.valueOf(possibleChancePoints())); 
