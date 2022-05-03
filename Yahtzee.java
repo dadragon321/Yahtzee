@@ -20,6 +20,7 @@ public class Yahtzee {
     for (int score : scoreSheet) {
       totalScore += score;
     }
+    System.out.println("Total Game Score: " + String.valueOf(totalScore));
   }
 
   public Yahtzee() {
@@ -260,22 +261,6 @@ public class Yahtzee {
       sumOfDice += die;
     }
     return sumOfDice;
-  }
-  /**
-    Checks total from upper section to see if
-    bonus should be awarded or not. Returns 35
-    if threshold is met, 0 otherwise.
-   */
-  private int checkUpperBonus() {
-    int sum = 0;
-    for (int i = 0; i < 6; i++) {
-      sum += scoreSheet[i];
-    }
-    if (sum > 63) {
-      return 35;
-    } else {
-      return 0;
-    }
   }
 
   private void displayPossibleScores() {
