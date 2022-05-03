@@ -41,7 +41,7 @@ public class Yahtzee {
     */
     scoreSheet = new int[15];
     for (int i = 0; i < 15; i++) {
-      scoreSheet[i] = 0;
+      scoreSheet[i] = -1;
     }
   }
 
