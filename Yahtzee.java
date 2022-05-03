@@ -105,14 +105,10 @@ public class Yahtzee {
     checkDice();
 
     displayPossibleScores();
-    if (promptUserToScoreOrNot()) {
-      System.out.println(getScoreRow());
-      turn++;
-      return;
-    }
-
+    System.out.println(getScoreRow());
     dice.clear();
     turn++;
+
   }
 
   public void roll(int n) {
