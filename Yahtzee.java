@@ -121,7 +121,7 @@ public class Yahtzee {
   private boolean promptUserToScoreOrNot() {
     String userScoreChoice;
     do {
-      System.out.println("Do you want to score this roll? (y or n)");
+      System.out.print("Do you want to score this roll? (y or n): ");
       userScoreChoice = sc.nextLine();
     } while (!(userScoreChoice.equals("y") || userScoreChoice.equals("n")));
     if (userScoreChoice.equals("y")) {
@@ -238,7 +238,7 @@ public class Yahtzee {
   public void checkDice() {
 	  int count = 1;
     for(int val:dice) {
-      System.out.println("Dice " + count + ": " + val + " ");
+      System.out.println("Die " + count + ": " + val);
       count++;
     }
     System.out.println();
