@@ -52,7 +52,7 @@ public class Yahtzee {
     int count = 0;
     /*
       testing score display
-    
+
     System.out.println("before");
     displayPossibleScores(this);
     System.out.println("after");
@@ -95,6 +95,8 @@ public class Yahtzee {
 
     roll(count);
     checkDice();
+
+    dice.clear();
   }
 
   public void roll(int n) {
@@ -106,7 +108,7 @@ public class Yahtzee {
    * Asks user to decide whether to score their roll or not
    * @return true if use says yes, false if they say no
    */
-  private boolean promptUserToScoreOrNot() {  
+  private boolean promptUserToScoreOrNot() {
     String userScoreChoice;
     do {
       System.out.print("Do you want to score this roll?");
@@ -261,31 +263,31 @@ public class Yahtzee {
     // upper section
     int i = 1;
     for (int score : possibleSingleUpperSectionPoints()) {
-      System.out.println("ROW " + String.valueOf(i) + ":  Possible Points in " + String.valueOf(i) + 
+      System.out.println("ROW " + String.valueOf(i) + ":  Possible Points in " + String.valueOf(i) +
         "'s............." + String.valueOf(score));
       i++;
     }
     // lower section
-    System.out.println("ROW 7:  Possible Points in 3 of a Kind....." + 
+    System.out.println("ROW 7:  Possible Points in 3 of a Kind....." +
         String.valueOf(possibleThreeOfAKindPoints()));
-    System.out.println("ROW 8:  Possible Points in 4 of a Kind....." + 
+    System.out.println("ROW 8:  Possible Points in 4 of a Kind....." +
         String.valueOf(possibleFourOfAKindPoints()));
-    System.out.println("ROW 9:  Possible Points in Full House......" + 
+    System.out.println("ROW 9:  Possible Points in Full House......" +
         String.valueOf(possibleFullHousePoints()));
-    System.out.println("ROW 10: Possible Points in Small Straight.." + 
+    System.out.println("ROW 10: Possible Points in Small Straight.." +
         String.valueOf(possibleSmallStraightPoints()));
-    System.out.println("ROW 11: Possible Points in Large Straight.." + 
+    System.out.println("ROW 11: Possible Points in Large Straight.." +
         String.valueOf(possibleLargeStraightPoints()));
-    System.out.println("ROW 12: Possible Points in Yahtzee........." + 
+    System.out.println("ROW 12: Possible Points in Yahtzee........." +
         String.valueOf(possibleYahtzeePoints()));
-    System.out.println("ROW 13: Possible Points in Chance.........." + 
-        String.valueOf(possibleChancePoints())); 
+    System.out.println("ROW 13: Possible Points in Chance.........." +
+        String.valueOf(possibleChancePoints()));
   }
 
   /**
    * This method calculates the possible points for every row in the
    * upper section
-   * @return an array of possible scores for the 6 rows 
+   * @return an array of possible scores for the 6 rows
    */
   public ArrayList<Integer> possibleSingleUpperSectionPoints() {
     ArrayList<Integer> result = new ArrayList<Integer>();
@@ -382,15 +384,15 @@ public class Yahtzee {
    * @return 30 if the user has a small straight, 0 otherwise
    */
   public int possibleSmallStraightPoints() {
-    if(Yahtzee.dice.contains(1) && Yahtzee.dice.contains(2) && 
+    if(Yahtzee.dice.contains(1) && Yahtzee.dice.contains(2) &&
       Yahtzee.dice.contains(3) && Yahtzee.dice.contains(4)) {
       return 30;
-    } 
-    else if(Yahtzee.dice.contains(2) && Yahtzee.dice.contains(3) && 
+    }
+    else if(Yahtzee.dice.contains(2) && Yahtzee.dice.contains(3) &&
       Yahtzee.dice.contains(4) && Yahtzee.dice.contains(5)) {
       return 30;
-    } 
-    else if(Yahtzee.dice.contains(3) && Yahtzee.dice.contains(4) && 
+    }
+    else if(Yahtzee.dice.contains(3) && Yahtzee.dice.contains(4) &&
       Yahtzee.dice.contains(5) && Yahtzee.dice.contains(6)) {
       return 30;
     }
@@ -415,7 +417,7 @@ public class Yahtzee {
 
   /**
    * Calculates possible points in Yahtzee row
-   * @return 100 if the user has 5 dice of the same value and a 
+   * @return 100 if the user has 5 dice of the same value and a
    * previously scored Yahtzee, 50 if the user has 5 dice of the
    * same value and no previous Yahtzee, and 0 otherwise
    */
