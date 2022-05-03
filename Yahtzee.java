@@ -71,7 +71,7 @@ public class Yahtzee {
     }
 
     do {
-      System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
+      System.out.print("Choose which dice to reroll by index (Enter 0 to get reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<=dice.size()) {
         dice.remove(drop-1);
@@ -92,7 +92,7 @@ public class Yahtzee {
 
     count = 0;
     do {
-      System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
+      System.out.print("Choose which dice to reroll by index (Enter 0 to get reroll): ");
       drop = sc.nextInt();
       if(drop>0 && drop<=dice.size()) {
         dice.remove(drop-1);
@@ -111,6 +111,7 @@ public class Yahtzee {
     }
 
     dice.clear();
+    turn++;
   }
 
   public void roll(int n) {
@@ -241,8 +242,7 @@ public class Yahtzee {
 
   public void checkDice() {
     for(int val:dice) {
-      System.out.print(val);
-      System.out.print(" ");
+      System.out.print(val + " ");
     }
     System.out.println();
   }
@@ -280,43 +280,43 @@ public class Yahtzee {
     int i = 1;
     for (int score : possibleSingleUpperSectionPoints()) {
       if (scoreSheet[i-1] == -1) {
-        System.out.println("ROW " + String.valueOf(i) + ":  Possible Points in " + String.valueOf(i) + 
+        System.out.println("ROW " + String.valueOf(i) + ":  Possible Points in " + String.valueOf(i) +
         "'s............." + String.valueOf(score));
       }
       i++;
     }
     // lower section
     if(scoreSheet[i-1] == -1) {
-      System.out.println("ROW 7:  Possible Points in 3 of a Kind....." + 
+      System.out.println("ROW 7:  Possible Points in 3 of a Kind....." +
           String.valueOf(possibleThreeOfAKindPoints()));
       i++;
     }
     if(scoreSheet[i-1] == -1) {
-      System.out.println("ROW 7:  Possible Points in 3 of a Kind....." + 
+      System.out.println("ROW 7:  Possible Points in 3 of a Kind....." +
           String.valueOf(possibleThreeOfAKindPoints()));
       i++;
     }
     if(scoreSheet[i-1] == -1) {
-      System.out.println("ROW 8:  Possible Points in 4 of a Kind....." + 
+      System.out.println("ROW 8:  Possible Points in 4 of a Kind....." +
           String.valueOf(possibleFourOfAKindPoints()));
       i++;
     }
     if(scoreSheet[i-1] == -1) {
-      System.out.println("ROW 9:  Possible Points in Full House......" + 
+      System.out.println("ROW 9:  Possible Points in Full House......" +
           String.valueOf(possibleFullHousePoints()));
       i++;
     }
     if(scoreSheet[i-1] == -1) {
-      System.out.println("ROW 10: Possible Points in Small Straight.." + 
+      System.out.println("ROW 10: Possible Points in Small Straight.." +
           String.valueOf(possibleSmallStraightPoints()));
       i++;
     }
-     System.out.println("ROW 12: Possible Points in Yahtzee........." + 
+     System.out.println("ROW 12: Possible Points in Yahtzee........." +
          String.valueOf(possibleYahtzeePoints()));
     i++;
     if(scoreSheet[i-1] == -1) {
-      System.out.println("ROW 13: Possible Points in Chance.........." + 
-          String.valueOf(possibleChancePoints())); 
+      System.out.println("ROW 13: Possible Points in Chance.........." +
+          String.valueOf(possibleChancePoints()));
       i++;
     }
   }
