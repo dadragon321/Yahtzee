@@ -66,6 +66,8 @@ public class Yahtzee {
     if (promptUserToScoreOrNot()) {
       System.out.println(getScoreRow());
       turn++;
+      if (turn == 14)
+        turn();
     }
 
     /**
