@@ -56,6 +56,7 @@ public class Yahtzee {
     Collections.sort(dice);
     checkDice();
     int drop;
+    ArrayList<Integer> dropList = new ArrayList<Integer>();
     int count = 0;
     /*
       testing score display
@@ -65,7 +66,7 @@ public class Yahtzee {
     System.out.println("after");
     */
 
-    /**
+    /*
      * displays the possible scores after first roll and asks the user if
      * they want to score the turn or not.
      */
@@ -79,15 +80,20 @@ public class Yahtzee {
     do {
       System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
-      if(drop>0 && drop<=dice.size()) {
-        dice.remove(drop-1);
+      if(drop>0 && drop<=dice.size() && !dropList.contains(drop)) {
+        dropList.add(drop);
         count++;
       }
     } while(drop !=0 && dice.size()>0);
 
+    for(int d : dropList)
+      dice.remove(d-1);
+
     roll(count);
     Collections.sort(dice);
     checkDice();
+    dropList.clear();
+    count = 0;
 
     displayPossibleScores();
     if (promptUserToScoreOrNot()) {
@@ -96,19 +102,23 @@ public class Yahtzee {
       return;
     }
 
-    count = 0;
     do {
       System.out.print("Choose which dice to reroll (Enter 0 to get reroll): ");
       drop = sc.nextInt();
-      if(drop>0 && drop<=dice.size()) {
-        dice.remove(drop-1);
+      if(drop>0 && drop<=dice.size() && !dropList.contains(drop)) {
+        dropList.add(drop);
         count++;
       }
     } while(drop !=0 && dice.size()>0);
 
+    for(int d : dropList)
+      dice.remove(d-1);
+
     roll(count);
     Collections.sort(dice);
     checkDice();
+    dropList.clear();
+
     displayPossibleScores();
     System.out.println(getScoreRow());
     dice.clear();
@@ -120,7 +130,7 @@ public class Yahtzee {
       dice.add((int)(Math.random()*6 + 1));
   }
 
-  /**
+  /*
    * Asks user to decide whether to score their roll or not
    * @return true if use says yes, false if they say no
    */
@@ -243,7 +253,7 @@ public class Yahtzee {
 
   private void checkDice() {
 	  int count = 1;
-    for(int val:dice) {
+    for(int val : dice) {
       System.out.println("Die " + count + ": " + val);
       count++;
     }
@@ -314,7 +324,7 @@ public class Yahtzee {
     i++;
   }
 
-  /**
+  /*
    * This method calculates the possible points for every row in the
    * upper section
    * @return an array of possible scores for the 6 rows
@@ -334,7 +344,7 @@ public class Yahtzee {
     return result;
   }
 
-  /**
+  /*
    * Calculates possible points in the 3 of a kind row
    * @return the sum of all dice if a 3 of a kind is present, 0
    * otherwise
@@ -356,7 +366,7 @@ public class Yahtzee {
     return 0;
   }
 
-  /**
+  /*
    * Calculates possible points in the 4 of a kind row
    * @return the sum of all dice if 4 of a kind is present, 0
    * otherwise
@@ -378,7 +388,7 @@ public class Yahtzee {
     return 0;
   }
 
-  /**
+  /*
    * Calculates the possible points in the full house row
    * @return 25 if user has a full house, 0 otherwise
    */
@@ -408,7 +418,7 @@ public class Yahtzee {
     return 0;
   }
 
-  /**
+  /*
    * Calculates possible points in small straight row
    * [(1, 2, 3, 4), (2, 3, 4, 5), (3, 4, 5, 6)]
    * @return 30 if the user has a small straight, 0 otherwise
@@ -429,7 +439,7 @@ public class Yahtzee {
     return 0;
   }
 
-  /**
+  /*
    * Calculates possible points in large straight row
    * [(1, 2, 3, 4, 5), (2, 3, 4, 5, 6)]
    * @return 40 if the user has a small straight, 0 otherwise
@@ -444,7 +454,7 @@ public class Yahtzee {
     return 40;
   }
 
-  /**
+  /*
    * Calculates possible points in Yahtzee row
    * @return 100 if the user has 5 dice of the same value and a
    * previously scored Yahtzee, 50 if the user has 5 dice of the
@@ -462,7 +472,7 @@ public class Yahtzee {
     return 0;
   }
 
-  /**
+  /*
    * Calculates the possible points for the chance row
    * @return the sum of all dice
    */
