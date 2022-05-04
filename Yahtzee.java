@@ -212,18 +212,18 @@ public class Yahtzee {
         break;
       // Chance
       case 13:
-        result = possibleChancePoints();
+        result = sumDice();
         break;
     }
     // If statement handles bonus yahtzee
     if (result == 100) {
       this.scoreSheet[13] += result;
       dice.clear();
-      return "Scored " + String.valueOf(result) + " in Bonus Yahtzee";
+      return "Scored " + result + " in Bonus Yahtzee";
     } else {
       this.scoreSheet[scoreRow-1] = result;
       dice.clear();
-      return "Scored " + String.valueOf(result) + " in row " + scoreRow;
+      return "Scored " + result + " in row " + scoreRow;
     }
   }
 
@@ -253,38 +253,38 @@ public class Yahtzee {
     int i = 1;
     for (int score : possibleSingleUpperSectionPoints()) {
       if (scoreSheet[i-1] == -1) {
-        System.out.println("ROW " + String.valueOf(i) + ":  Possible Points in " + String.valueOf(i) +
-          "'s............." + String.valueOf(score));
+        System.out.println("ROW " + i + ":  Possible Points in " + i +
+          "'s............." + score);
       }
       i++;
     }
+
     // lower section
     if(scoreSheet[i-1] == -1)
-      System.out.println("ROW 7:  Possible Points in 3 of a Kind....." +
-          String.valueOf(possibleThreeOfAKindPoints()));
+      System.out.println("ROW 7:  Possible Points in 3 of a Kind....." + possibleThreeOfAKindPoints());
     i++;
+
     if(scoreSheet[i-1] == -1)
-      System.out.println("ROW 8:  Possible Points in 4 of a Kind....." +
-          String.valueOf(possibleFourOfAKindPoints()));
+      System.out.println("ROW 8:  Possible Points in 4 of a Kind....." + possibleFourOfAKindPoints());
     i++;
+
     if(scoreSheet[i-1] == -1)
-      System.out.println("ROW 9:  Possible Points in Full House......" +
-          String.valueOf(possibleFullHousePoints()));
+      System.out.println("ROW 9:  Possible Points in Full House......" + possibleFullHousePoints());
     i++;
+
     if(scoreSheet[i-1] == -1)
-      System.out.println("ROW 10: Possible Points in Small Straight.." +
-          String.valueOf(possibleSmallStraightPoints()));
+      System.out.println("ROW 10: Possible Points in Small Straight.." + possibleSmallStraightPoints());
     i++;
+
     if(scoreSheet[i-1] == -1)
-      System.out.println("ROW 11: Possible Points in Large Straight.." +
-          String.valueOf(possibleLargeStraightPoints()));
+      System.out.println("ROW 11: Possible Points in Large Straight.." + possibleLargeStraightPoints());
     i++;
-     System.out.println("ROW 12: Possible Points in Yahtzee........." +
-         String.valueOf(possibleYahtzeePoints()));
+
+     System.out.println("ROW 12: Possible Points in Yahtzee........." + possibleYahtzeePoints());
     i++;
+
     if(scoreSheet[i-1] == -1)
-      System.out.println("ROW 13: Possible Points in Chance.........." +
-          String.valueOf(possibleChancePoints()));
+      System.out.println("ROW 13: Possible Points in Chance.........." + sumDice());
     i++;
   }
 
@@ -417,14 +417,6 @@ public class Yahtzee {
       return 50;
     }
     return 0;
-  }
-
-  /*
-   * Calculates the possible points for the chance row
-   * @return the sum of all dice
-   */
-  private int possibleChancePoints() {
-    return sumDice();
   }
 
   private int upperTotalScore() {
