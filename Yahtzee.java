@@ -6,21 +6,17 @@ import java.util.Collections;
 
 public class Yahtzee {
   private Scanner sc;
-  private static ArrayList<Integer> dice;
-  private static int[] scoreSheet;
+  private ArrayList<Integer> dice;
+  private int[] scoreSheet;
   private int turn;
 
   public static void main(String[] args) {
-    int totalScore = 0;
     Yahtzee game = new Yahtzee();
     while (game.turn < 14) {
       game.turn();
     }
-    scoreSheet[14] = upperTotalScore() > 63 ? 35 : 0;
-    for (int score : scoreSheet) {
-      totalScore += score;
-    }
-    System.out.println("Total Game Score: " + String.valueOf(totalScore));
+
+    System.out.println("Total Game Score: " + String.valueOf(game.finalScore()));
   }
 
   public Yahtzee() {
@@ -86,6 +82,7 @@ public class Yahtzee {
       }
     } while(drop !=0 && dice.size()>0);
 
+    Collections.sort(dropList, Collections.reverseOrder());
     for(int d : dropList)
       dice.remove(d-1);
 
@@ -111,6 +108,7 @@ public class Yahtzee {
       }
     } while(drop !=0 && dice.size()>0);
 
+    Collections.sort(dropList, Collections.reverseOrder());
     for(int d : dropList)
       dice.remove(d-1);
 
@@ -128,6 +126,15 @@ public class Yahtzee {
   public void roll(int n) {
     for(int i=0; i<n; i++)
       dice.add((int)(Math.random()*6 + 1));
+  }
+
+  public int finalScore() {
+    int totalScore = 0;
+    scoreSheet[14] = upperTotalScore() > 63 ? 35 : 0;
+    for (int score : scoreSheet) {
+      totalScore += score;
+    }
+    return totalScore;
   }
 
   /*
@@ -260,14 +267,9 @@ public class Yahtzee {
     System.out.println();
   }
 
-
-  private ArrayList<Integer> getDice() {
-    return dice;
-  }
-
   private int sumDice() {
     int sumOfDice = 0;
-    for (int die : Yahtzee.dice) {
+    for (int die : dice) {
       sumOfDice += die;
     }
     return sumOfDice;
@@ -334,7 +336,7 @@ public class Yahtzee {
     int score;
     for (int i = 1; i <= 6; i++) {
       score = 0;
-      for(int die : Yahtzee.dice) {
+      for(int die : dice) {
         if (die == i) {
           score += die;
         }
@@ -352,7 +354,7 @@ public class Yahtzee {
   private int possibleThreeOfAKindPoints() {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
     int sumOfDice = 0;
-    for (int die : Yahtzee.dice) {
+    for (int die : dice) {
       if (diceCount.get(die) == null) {
         diceCount.put(die, 1);
       } else {
@@ -374,7 +376,7 @@ public class Yahtzee {
   private int possibleFourOfAKindPoints() {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
     int sumOfDice = 0;
-    for (int die : Yahtzee.dice) {
+    for (int die : dice) {
       if (diceCount.get(die) == null) {
         diceCount.put(die, 1);
       } else {
@@ -394,7 +396,7 @@ public class Yahtzee {
    */
   private int possibleFullHousePoints() {
     HashMap<Integer, Integer> diceCount = new HashMap<Integer, Integer>();
-    for (int die : Yahtzee.dice) {
+    for (int die : dice) {
       if (diceCount.get(die) == null) {
         diceCount.put(die, 1);
       } else {
@@ -424,16 +426,16 @@ public class Yahtzee {
    * @return 30 if the user has a small straight, 0 otherwise
    */
   private int possibleSmallStraightPoints() {
-    if(Yahtzee.dice.contains(1) && Yahtzee.dice.contains(2) &&
-      Yahtzee.dice.contains(3) && Yahtzee.dice.contains(4)) {
+    if(dice.contains(1) && dice.contains(2) &&
+      dice.contains(3) && dice.contains(4)) {
       return 30;
     }
-    else if(Yahtzee.dice.contains(2) && Yahtzee.dice.contains(3) &&
-      Yahtzee.dice.contains(4) && Yahtzee.dice.contains(5)) {
+    else if(dice.contains(2) && dice.contains(3) &&
+      dice.contains(4) && dice.contains(5)) {
       return 30;
     }
-    else if(Yahtzee.dice.contains(3) && Yahtzee.dice.contains(4) &&
-      Yahtzee.dice.contains(5) && Yahtzee.dice.contains(6)) {
+    else if(dice.contains(3) && dice.contains(4) &&
+      dice.contains(5) && dice.contains(6)) {
       return 30;
     }
     return 0;
@@ -445,7 +447,6 @@ public class Yahtzee {
    * @return 40 if the user has a small straight, 0 otherwise
    */
   private int possibleLargeStraightPoints() {
-    ArrayList<Integer> dice = Yahtzee.dice;
     for (int i = 1; i < 5; i++) {
       if(dice.get(i) != dice.get(i - 1) + 1) {
         return 0;
@@ -461,8 +462,6 @@ public class Yahtzee {
    * same value and no previous Yahtzee, and 0 otherwise
    */
   private int possibleYahtzeePoints() {
-    ArrayList<Integer> dice = Yahtzee.dice;
-    Collections.sort(dice);
     if (dice.get(0) == dice.get(4)) {
       if (scoreSheet[11] == 50) {
         return 100;
@@ -480,11 +479,10 @@ public class Yahtzee {
     return sumDice();
   }
 
-  public static int upperTotalScore() {
+  public int upperTotalScore() {
     int upperTotal = 0;
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++)
       upperTotal += scoreSheet[i];
-    }
     return upperTotal;
   }
 }
