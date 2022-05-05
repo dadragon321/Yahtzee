@@ -280,7 +280,7 @@ public class Yahtzee {
       System.out.println("ROW 11: Possible Points in Large Straight.." + possibleLargeStraightPoints());
     i++;
 
-     System.out.println("ROW 12: Possible Points in Yahtzee........." + possibleYahtzeePoints());
+    System.out.println("ROW 12: Possible Points in Yahtzee........." + possibleYahtzeePoints());
     i++;
 
     if(scoreSheet[i-1] == -1)
